@@ -29,7 +29,7 @@ defmodule PortfolioWeb.Endpoint do
     socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
     plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
-    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :portfolio
+    # plug Phoenix.Ecto.CheckRepoStatus, otp_app: :portfolio
   end
 
   plug Phoenix.LiveDashboard.RequestLogger,
