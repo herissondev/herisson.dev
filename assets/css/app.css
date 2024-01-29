@@ -2,4 +2,162 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+
 /* This file is for your main application CSS */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 224 71.4% 4.1%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4.1%;
+
+    --primary: 220.9 39.3% 11%;
+    --primary-foreground: 210 20% 98%;
+
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220.9 39.3% 11%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 224 71.4% 4.1%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 224 71.4% 4.1%;
+    --foreground: 210 20% 98%;
+
+    --card: 224 71.4% 4.1%;
+    --card-foreground: 210 20% 98%;
+
+    --popover: 224 71.4% 4.1%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 210 20% 98%;
+    --primary-foreground: 220.9 39.3% 11%;
+
+    --secondary: 215 27.9% 16.9%;
+    --secondary-foreground: 210 20% 98%;
+
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+
+    --accent: 215 27.9% 16.9%;
+    --accent-foreground: 210 20% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 216 12.2% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.print-force-new-page {
+  page-break-before: always;
+}
+/* MAKEUP NIMBLE PUBLISHER */
+pre {
+  padding: 10px;
+  border: 1px solid #999999;
+  border-radius: 7px;
+}
+.makeup .hll {background-color: #ffffcc}
+.makeup {background-color: #ffffff}.makeup .unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.makeup .bp {color: #999999; } /* :name_builtin_pseudo */
+.makeup .c {color: #999988; font-style: italic; } /* :comment */
+.makeup .c1 {color: #999988; font-style: italic; } /* :comment_single */
+.makeup .ch {color: #999988; font-style: italic; } /* :comment_hashbang */
+.makeup .cm {color: #999988; font-style: italic; } /* :comment_multiline */
+.makeup .cp {color: #999999; font-style: normal; font-weight: bold; } /* :comment_preproc */
+.makeup .cpf {color: #999999; font-style: normal; font-weight: bold; } /* :comment_preproc_file */
+.makeup .cs {color: #999999; font-style: italic; font-weight: bold; } /* :comment_special */
+.makeup .dl {color: #bb8844; } /* :string_delimiter */
+.makeup .err {color: #a61717; background-color: #e3d2d2; } /* :error */
+.makeup .fm {color: #990000; font-weight: bold; } /* :name_function_magic */
+.makeup .gd {color: #000000; background-color: #ffdddd; } /* :generic_deleted */
+.makeup .ge {font-style: italic; } /* :generic_emph */
+.makeup .gh {color: #999999; } /* :generic_heading */
+.makeup .gi {color: #000000; background-color: #ddffdd; } /* :generic_inserted */
+.makeup .go {color: #888888; } /* :generic_output */
+.makeup .gp {color: #555555; } /* :generic_prompt */
+.makeup .gr {color: #aa0000; } /* :generic_error */
+.makeup .gs {font-weight: bold; } /* :generic_strong */
+.makeup .gt {color: #aa0000; } /* :generic_traceback */
+.makeup .gu {color: #aaaaaa; } /* :generic_subheading */
+.makeup .il {color: #009999; } /* :number_integer_long */
+.makeup .k {font-weight: bold; } /* :keyword */
+.makeup .kc {font-weight: bold; } /* :keyword_constant */
+.makeup .kd {font-weight: bold; } /* :keyword_declaration */
+.makeup .kn {font-weight: bold; } /* :keyword_namespace */
+.makeup .kp {font-weight: bold; } /* :keyword_pseudo */
+.makeup .kr {font-weight: bold; } /* :keyword_reserved */
+.makeup .kt {color: #445588; font-weight: bold; } /* :keyword_type */
+.makeup .m {color: #009999; } /* :number */
+.makeup .mb {color: #009999; } /* :number_bin */
+.makeup .mf {color: #009999; } /* :number_float */
+.makeup .mh {color: #009999; } /* :number_hex */
+.makeup .mi {color: #009999; } /* :number_integer */
+.makeup .mo {color: #009999; } /* :number_oct */
+.makeup .na {color: #008080; } /* :name_attribute */
+.makeup .nb {color: #999999; } /* :name_builtin */
+.makeup .nc {color: #445588; font-weight: bold; } /* :name_class */
+.makeup .ne {color: #990000; font-weight: bold; } /* :name_exception */
+.makeup .nf {color: #990000; font-weight: bold; } /* :name_function */
+.makeup .ni {color: #800080; } /* :name_entity */
+.makeup .nn {color: #555555; } /* :name_namespace */
+.makeup .no {color: #008080; } /* :name_constant */
+.makeup .nt {color: #000080; } /* :name_tag */
+.makeup .nv {color: #008080; } /* :name_variable */
+.makeup .o {font-weight: bold; } /* :operator */
+.makeup .ow {font-weight: bold; } /* :operator_word */
+.makeup .s {color: #bb8844; } /* :string */
+.makeup .s1 {color: #bb8844; } /* :string_single */
+.makeup .s2 {color: #bb8844; } /* :string_double */
+.makeup .sa {color: #bb8844; } /* :string_affix */
+.makeup .sb {color: #bb8844; } /* :string_backtick */
+.makeup .sc {color: #bb8844; } /* :string_char */
+.makeup .sd {color: #bb8844; } /* :string_doc */
+.makeup .se {color: #bb8844; } /* :string_escape */
+.makeup .sh {color: #bb8844; } /* :string_heredoc */
+.makeup .si {color: #bb8844; } /* :string_interpol */
+.makeup .sr {color: #808000; } /* :string_regex */
+.makeup .ss {color: #bb8844; } /* :string_symbol */
+.makeup .sx {color: #bb8844; } /* :string_other */
+.makeup .sx {color: #bb8844; } /* :string_sigil */
+.makeup .vc {color: #008080; } /* :name_variable_class */
+.makeup .vg {color: #008080; } /* :name_variable_global */
+.makeup .vi {color: #008080; } /* :name_variable_instance */
+.makeup .vm {color: #008080; } /* :name_variable_magic */
