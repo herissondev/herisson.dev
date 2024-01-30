@@ -6,7 +6,7 @@ metadata:
 spec:
   # certificats wildcard
   dnsNames:
-  - '*.herisson.dev'
+  - 'herisson.dev'
 
   issuerRef:
     kind: ClusterIssuer
