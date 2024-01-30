@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: herisson.dev
+    name: herisson-dev
     namespace: herissondev
     labels:
-        app: herisson.dev
+        app: herisson-dev
 spec:
     replicas: 1
     selector:
         matchLabels:
-            app: herisson.dev
+            app: herisson-dev
     template:
         metadata:
             labels:
-                app: herisson.dev
+                app: herisson-dev
         spec:
             containers:
-                - name: herisson.dev
+                - name: herisson-dev
                   image: aimerisson/herisson.dev:latest
                   ports:
                       - containerPort: 4000

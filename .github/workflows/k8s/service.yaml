@@ -6,7 +6,7 @@ metadata:
 spec:
     type: ClusterIP
     selector:
-        app: herissondev-svc
+        app: herisson-dev
     ports:
         - protocol: 'TCP'
           port: 4000
