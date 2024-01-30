@@ -3,16 +3,14 @@
   <section class="mx-auto w-full max-w-2xl space-y-8 bg-white print:space-y-6">
     <div class="flex items-center justify-between">
       <div class="flex-1 space-y-1.5">
-        <h1 class="text-2xl font-bold"><%= @cv.name %></h1>
+        <h1 class="text-2xl font-bold">
+          <%= @cv.name %>
+        </h1>
         <p class="max-w-md text-pretty font-mono text-sm text-muted-foreground">
           <%= @cv.about %>
         </p>
         <p class="max-w-md items-center text-pretty font-mono text-xs text-muted-foreground">
-          <a
-            class="inline-flex gap-x-1.5 align-baseline leading-none hover:underline"
-            href=""
-            target="_blank"
-          >
+          <a class="inline-flex gap-x-1.5 align-baseline leading-none hover:underline" href="" target="_blank">
             <%= @cv.location %>
           </a>
         </p>
@@ -25,46 +23,37 @@
       </div>
       <.avatar image={~p"/images/moi_profile.jpeg"} />
     </div>
-    <.section>
-      <h2 class="text-xl font-bold">À propos</h2>
-      <p class="text-pretty font-mono text-sm text-muted-foreground">
-        <%= @cv.summary %>
-      </p>
-    </.section>
+    <!-- <.section> -->
+    <!--   <h2 class="text-xl font-bold">À propos</h2> -->
+    <!--   <p class="text-pretty font-mono text-sm text-muted-foreground"> -->
+    <!--     <%= @cv.summary %> -->
+    <!--   </p> -->
+    <!-- </.section> -->
     <.section>
       <h2 class="text-xl font-bold">Expérience</h2>
       <%= for exp <- @cv.experiences do %>
-        <.event
-          title={exp.title}
-          date={exp.date}
-          job_title={exp.job_title}
-          summary={exp.summary}
-          skills={exp.skills}
-          link={Map.get(exp, :link)}
-        />
-      <% end %>
+        <.event title={exp.title} date={exp.date} job_title={exp.job_title} summary={exp.summary} skills={exp.skills}
+          link={Map.get(exp, :link)} />
+        <% end %>
     </.section>
     <.section>
       <h2 class="text-xl font-bold">Formation</h2>
       <%= for exp <- @cv.formations do %>
         <.event title={exp.title} job_title={exp.job_title} date={exp.date} summary={exp.summary} />
-      <% end %>
+        <% end %>
     </.section>
     <.section class="">
       <h2 class="text-xl font-bold">Projets</h2>
       <div class="grid grid-cols-2 md:grid-cols-3 gap-4 w-full">
         <%= for projet <- @cv.projects do %>
-          <.project
-            title={projet.title}
-            description={projet.description}
-            tags={projet.tags}
-            link={Map.get(projet, :link)}
-          />
-        <% end %>
+          <.project title={projet.title} description={projet.description} tags={projet.tags} link={Map.get(projet,
+            :link)} />
+          <% end %>
       </div>
     </.section>
 
-    <.tag text="default" /> <.tag text="secondary" variant="secondary" />
+    <.tag text="default" />
+    <.tag text="secondary" variant="secondary" />
     <.tag text="destructive" variant="destructive" />
     <.tag text="outline" variant="outline" />
   </section>

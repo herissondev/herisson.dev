@@ -16,11 +16,21 @@ defmodule PortfolioWeb.PageController do
         github_link: "https://github.com/herissondev/",
         linkedin_link: "https://www.linkedin.com/in/aime-risson/"
       },
-      about: "J'aime bien l'informatique ouais ouais",
+      about: "Développeur informatique en devenir ! Passionné par les nouvelles technologies, j'aspire à maitriser la chaine de développement complète.",
       location: "Lyon, France",
       summary:
-        "Passionné par l’informatique, je suis en permanence à la recherche de défis techniques et variés pour approfondir mes connaissances et me former aux meilleures pratiques de développement. Je suis également profondément intéressé par la maîtrise de la chaîne de développement complète, de la conception au déploiement, en passant par les outils DevOps, l’intégration et le déploiement continus (CI/CD), les tests automatisés, Docker et Kubernetes.",
+        "Actuellement en BUT Informatique à l'IUT Lyon 1, je suis à la recherche d'un stage de 2 mois en développement backend.",
       experiences: [
+        %{
+          title: "Développement d'un interpréteur - Archethic",
+          job_title: "Stage Développement Backend",
+          link: "https://github.com/archethic-foundation/archethic-node",
+          date: "Juillet 2023",
+          skills: ["Elixir", "GIT", "RPC", "Tests", "Agile"],
+          description: "",
+          summary:
+            "Stage obtenu suite à des contributions open source dans le projet blockchain Archethic. Manipulation d’AST (Abstract Syntax Tree) en Elixir : enrichissement d’un langage interprété maison."
+        },
         %{
           title: "Application Métier Industriel - CloudFlow",
           job_title: "Développement Full Stack",
@@ -31,14 +41,14 @@ defmodule PortfolioWeb.PageController do
             "Conception, réalisation et vente d’une application de planification de maintenance industrielle. \n Réalisation du backend et frontend."
         },
         %{
-          title: "Développement d'un interpréteur - Archethic",
-          job_title: "Stage Développement Backend",
-          link: "https://github.com/archethic-foundation/archethic-node",
-          date: "Juillet 2023",
-          skills: ["Elixir", "GIT", "RPC", "Tests", "Agile"],
+          title: "Refactoring Javascript  vers Typescript - Archethic",
+          job_title: "Stage Développement",
+          link: "https://github.com/archethic-foundation/",
+          date: "Avril 2023",
+          skills: ["Typescript","Javascript", "CI/CD","Agile"],
           description: "",
           summary:
-            "Stage obtenu suite à des contributions open source dans le projet blockchain Archethic. Manipulation d’AST (Abstract Syntax Tree) en Elixir : enrichissement d’un langage interprété maison."
+            "Stage obtenu suite à des contributions open source dans le projet blockchain Archethic. Refactoring d'un SDK Javascript vers un SDK Typescript."
         }
       ],
       formations: [
@@ -61,6 +71,11 @@ defmodule PortfolioWeb.PageController do
       ],
       projects: [
         %{
+          title: "CloudFlow",
+          description: "Création d'une entreprise pour vendre des logiciels de gestion industrielle.",
+          tags: ["Monorepo", "Kubernetes", "Django", "Next.js"],
+        },
+        %{
           title: "herisson.dev",
           description: "Mon site personnel et blog. Fait avec Elixir & Phoenix",
           tags: ["Open Source", "Elixir", "Phoenix"],
@@ -80,16 +95,18 @@ defmodule PortfolioWeb.PageController do
           link: "https://github.com/herissondev/vinted-api-wrapper"
         },
         %{
-          title: "Vinted Wrapper",
+          title: "AEweb Github Action",
+          link: "https://github.com/archethic-foundation/aeweb-github-action",
           description:
-            "Un package Python facilitant l'accès à l'API  je suce des bites toutes la journée si tu veux je peux te sucer elouan Vinted pour rechercher de nouvelles annonces.",
-          tags: ["Open Source", "Python", "PyPi"]
+            "Développement d'une Action Github permettant d'héberger facilement un site web sur la blockchain Archethic",
+          tags: ["Open Source", "Github Action", "Javascript"]
         },
         %{
-          title: "Vinted Wrapper",
+          title: "Serrata",
+          link: "https://serrata.super-sympa.fr/",
           description:
-            "Un package Python facilitant l'accès à l'API Vinted pour rechercher de nouvelles annonces.",
-          tags: ["Open Source", "Python", "PyPi"]
+            "Jeu de tapage de clavier sur les drapeaux du monde. Fait entre amis !",
+          tags: ["Open Source", "React", "ExpressJS"]
         }
       ]
     }
