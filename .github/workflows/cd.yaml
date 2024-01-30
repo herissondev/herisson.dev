@@ -37,3 +37,5 @@ jobs:
           context: .
           push: true
           tags: aimerisson/herisson.dev:${{ steps.commit.outputs.short }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
