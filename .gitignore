@@ -1,5 +1,7 @@
 .idea
 
+/.github/workflows/k8s/secret.yaml
+
 # The directory Mix will write compiled artifacts to.
 /_build/
 
