@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: herissondev-certificate
+  namespace: herissondev
+spec:
+  # certificats wildcard
+  dnsNames:
+  - '*.herisson.dev'
+
+  issuerRef:
+    kind: ClusterIssuer
+    name: cert-manager-herissondev #notre issuer
+  # Secret pour stocker les certificats
+  secretName: herissondev-wildcard-certificate-secret
