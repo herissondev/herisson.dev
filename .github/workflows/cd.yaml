@@ -51,8 +51,8 @@ jobs:
         with:
           namespace: herissondev
           manifests: |
-            .github/workflows/deployment.yaml
-            .github/workflows/ingress.yaml
-            .github/workflows/service.yaml
+            .github/workflows/k8s/deployment.yaml
+            .github/workflows/k8s/ingress.yaml
+            .github/workflows/k8s/service.yaml
           images: |
             aimerisson/herisson.dev:${{ steps.commit.outputs.short }}
