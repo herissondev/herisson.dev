@@ -4,7 +4,7 @@ defmodule PortfolioWeb.PageController do
   def home(conn, _params) do
     # The home page is often custom made,
     # so skip the default app layout.
-    render(conn, :home, layout: false, cv: cv_data(), page_title: "Aimé Risson")
+    render(conn, :home, cv: cv_data(), page_title: "Aimé Risson")
   end
 
   defp cv_data do

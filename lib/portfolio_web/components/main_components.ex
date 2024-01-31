@@ -1,9 +1,9 @@
 defmodule PortfolioWeb.MainComponents do
   use PortfolioWeb, :html
 
-  attr :href, :string, required: true
-  attr :icon, :string, required: true, doc: "icon as used with heroicons: hero-arrow-solid"
-  attr :target, :string, default: "_self", values: ["_self", "_blank", "_parent", "_top"]
+  attr(:href, :string, required: true)
+  attr(:icon, :string, required: true, doc: "icon as used with heroicons: hero-arrow-solid")
+  attr(:target, :string, default: "_self", values: ["_self", "_blank", "_parent", "_top"])
 
   def icon_link(%{icon: "hero-" <> _} = assigns) do
     ~H"""
@@ -29,8 +29,8 @@ defmodule PortfolioWeb.MainComponents do
     """
   end
 
-  slot :inner_block
-  attr :class, :string, default: nil
+  slot(:inner_block)
+  attr(:class, :string, default: nil)
 
   def section(assigns) do
     ~H"""
@@ -40,7 +40,7 @@ defmodule PortfolioWeb.MainComponents do
     """
   end
 
-  attr :image, :string, required: true
+  attr(:image, :string, required: true)
 
   def avatar(assigns) do
     ~H"""
@@ -50,11 +50,12 @@ defmodule PortfolioWeb.MainComponents do
     """
   end
 
-  attr :variant, :string,
+  attr(:variant, :string,
     values: ["default", "secondary", "destructive", "outline"],
     default: "default"
+  )
 
-  attr :text, :string, required: true
+  attr(:text, :string, required: true)
 
   def tag(assigns) do
     ~H"""
@@ -67,10 +68,10 @@ defmodule PortfolioWeb.MainComponents do
     """
   end
 
-  attr :title, :string, required: true
-  attr :description, :string, required: true
-  attr :tags, :list, required: true
-  attr :link, :string, default: nil
+  attr(:title, :string, required: true)
+  attr(:description, :string, required: true)
+  attr(:tags, :list, required: true)
+  attr(:link, :string, default: nil)
 
   def project(assigns) do
     ~H"""
@@ -89,13 +90,13 @@ defmodule PortfolioWeb.MainComponents do
     </div>
     """
   end
-
-  attr :title, :string, required: true
-  attr :date, :string
-  attr :job_title, :string, default: ""
-  attr :summary, :string, required: true
-  attr :skills, :list, default: []
-  attr :link, :string, default: nil
+  
+  attr(:title, :string, required: true)
+  attr(:date, :string)
+  attr(:job_title, :string, default: "")
+  attr(:summary, :string, required: true)
+  attr(:skills, :list, default: [])
+  attr(:link, :string, default: nil)
   # TODO : Move to another file
   def event(assigns) do
     ~H"""
@@ -141,8 +142,7 @@ defmodule PortfolioWeb.MainComponents do
     do: "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80"
 
   defp tag_variant("outline"), do: "text-foreground"
-
-  attr :icon, :string, required: true
+  attr(:icon, :string, required: true) 
 
   defp custom_icon(%{icon: "linkedin" <> _} = assigns) do
     ~H"""

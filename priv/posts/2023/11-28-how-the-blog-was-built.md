@@ -1,8 +1,8 @@
 %{
-  title: "Hello World!",
+  title: "Building this blog",
   author: "Jaime Iniesta",
-  tags: ~w(hello),
-  description: "Our first blog post is here"
+  tags: ~w(Elixir Phoenix NimblePublisher),
+  description: "Short post on the technologies used to build this blog and portfolio."
 }
 ---
 Yes, this is **the post** you've been waiting for.
