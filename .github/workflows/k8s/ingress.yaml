@@ -6,11 +6,26 @@ metadata:
 spec:
   entryPoints:
     - websecure
+
   routes:
     - match: Host(`herisson.dev`)
       kind: Rule
+      middlewares:
+        - name: redirect-to-www
+          namespace: traefik
       services:
         - name: herissondev-svc
           port: 4000
   tls:
     secretName: herissondev-wildcard-certificate-secret
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-to-nonwww
+  namespace: herissondev
+spec:
+  redirectRegex:
+    permanent: true
+    regex: ^(?:https://)?(?:www\.)?(.+)
+    replacement: https://${1}
