@@ -11,7 +11,7 @@ spec:
     - match: Host(`herisson.dev`)
       kind: Rule
       middlewares:
-        - name: redirect-to-www
+        - name: redirect-to-nonwww
           namespace: traefik
       services:
         - name: herissondev-svc
@@ -23,7 +23,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: redirect-to-nonwww
-  namespace: herissondev
+  namespace: traefik
 spec:
   redirectRegex:
     permanent: true
