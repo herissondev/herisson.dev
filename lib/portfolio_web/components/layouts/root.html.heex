@@ -10,6 +10,15 @@
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
+    <script type="application/ld+json">
+    {
+      "@context" : "https://schema.org",
+      "@type" : "WebSite",
+      "name" : "Herisson.dev",
+      "alternateName" : ["Herisson dev blog", "Aimé Risson", "Blog Aimé Risson", "Blog Dev Aimé Risson", "Blog AR" ],
+      "url" : "https://herisson.dev",
+    }
+  </script>
   </head>
   <body class="bg-white antialiased">
     <%= @inner_content %>
