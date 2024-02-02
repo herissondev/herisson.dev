@@ -12,7 +12,7 @@ spec:
       kind: Rule
       middlewares:
         - name: redirect-to-nonwww
-          namespace: traefik
+          namespace: herissondev
       services:
         - name: herissondev-svc
           port: 4000
@@ -23,7 +23,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: redirect-to-nonwww
-  namespace: traefik
+  namespace: herissondev
 spec:
   redirectRegex:
     permanent: true
