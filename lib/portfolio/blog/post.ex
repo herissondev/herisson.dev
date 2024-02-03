@@ -18,7 +18,7 @@ defmodule Portfolio.Blog.Post do
           "@type": "BlogPosting",
           "headline": "#{attrs.title}",
           "image": [],
-          "datePublished": "#{date}",
+          "datePublished": "#{Date.to_iso8601(date)}",
           "dateModified": "#{date}",
           "author": [{
               "@type": "Person",
