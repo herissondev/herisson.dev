@@ -1,3 +1,7 @@
+<script type='application/ld+json'>
+    <%= @post.json_ld |> raw() %>
+</script>
+
 <.link href={~p"/blog"}>← All posts</.link>
 
 <h1><%= @post.title %></h1>
