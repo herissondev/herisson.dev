@@ -15,11 +15,11 @@ defmodule Portfolio.Blog.Post do
     """
     {
           "@context": "https://schema.org",
-          "@type": "NewsArticle",
+          "@type": "BlogPosting",
           "headline": "#{attrs.title}",
           "image": [],
           "datePublished": "#{date}",
-          "dateModified": "2015-02-05T09:20:00+08:00",
+          "dateModified": "#{date}",
           "author": [{
               "@type": "Person",
               "name": "Aimé Risson",

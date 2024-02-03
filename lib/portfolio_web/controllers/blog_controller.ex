@@ -3,10 +3,11 @@ defmodule PortfolioWeb.BlogController do
   use PortfolioWeb, :controller
 
   def index(conn, _params) do
-    render(conn, :index, posts: Blog.recent_posts())
+    render(conn, :index, posts: Blog.recent_posts(), page_title: "Blog")
   end
 
   def show(conn, %{"id" => id}) do
-    render(conn, :show, post: Blog.get_post_by_id!(id))
+    post = Blog.get_post_by_id!(id)
+    render(conn, :show, post: post, page_title: post.title)
   end
 end
