@@ -6,14 +6,9 @@
     </a>
 
     <div class="flex items-center gap-4 font-semibold leading-6 text-zinc-900">
-      <a href={~p"/"} class="font-bold hover:text-zinc-700">
-        Moi
-      </a>
-      <!-- if page_title == "Blog" do underlining -->
-      <a href={~p"/blog"} class="font-bold hover:text-zinc-700">
+      <a href={~p"/blog"} class={"font-bold hover:text-zinc-700 #{if @page_title == "Blog", do: "underline"}" }>
         Blog
       </a>
-
     </div>
   </div>
 </header>
