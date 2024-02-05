@@ -1,4 +1,4 @@
-<main class="container  mx-auto scroll-my-12 overflow-auto p-4 print:p-12 md:p-16">
+<div class="container  mx-auto scroll-my-12 overflow-auto p-4 print:p-12 md:p-16">
   <section class="mx-auto w-full max-w-2xl space-y-8 bg-white print:space-y-6">
     <div class="flex items-center justify-between">
       <div class="flex-1 space-y-1.5">
@@ -14,10 +14,10 @@
           </a>
         </p>
         <div class="flex gap-x-1 pt-1 font-mono text-sm text-muted-foreground print:hidden">
-          <.icon_link href={"mailto:#{@cv.social.email}"} icon="hero-envelope" target="_blank" />
-          <.icon_link href={"tel:#{@cv.social.phone}"} icon="hero-phone" target="_blank" />
-          <.icon_link href={@cv.social.linkedin_link} icon="linkedin" target="_blank" />
-          <.icon_link href={@cv.social.github_link} icon="github" target="_blank" />
+          <.icon_link href={"mailto:#{@cv.social.email}"} icon="hero-envelope" target="_blank" label={"Mail contact"}/>
+          <.icon_link href={"tel:#{@cv.social.phone}"} icon="hero-phone" target="_blank" label={"Phone contact"}/>
+          <.icon_link href={@cv.social.linkedin_link} icon="linkedin" target="_blank" label={"Linkedin profile"} />
+          <.icon_link href={@cv.social.github_link} icon="github" target="_blank" label={"Github profile"}/>
         </div>
       </div>
       <.avatar image={~p"/images/moi_profile.jpeg"} />
@@ -56,4 +56,4 @@
     <.tag text="destructive" variant="destructive" />
     <.tag text="outline" variant="outline" />
   </section>
-</main>
+</div>
