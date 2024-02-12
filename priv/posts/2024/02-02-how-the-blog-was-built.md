@@ -35,7 +35,7 @@ NimblePublisher as of their [github repo](https://github.com/dashbitco/nimble_pu
 Remember I wanted markdown support, well that is exactly it. It allows me to simply write blog post with code as markdown and NimblePublisher takes care of the rest.
 Here is how I would define a blog post:
 
-```
+```markdown
 %{
   title: "Building this blog",
   author: "Aimé Risson",
@@ -46,9 +46,10 @@ Here is how I would define a blog post:
 
 
 This is a *markdown* document with support for code highlighters:
+```
 
 ```elixir
-IO.puts "hello world"
+IO.puts("test")
 ```
 
 Effective!

@@ -1,17 +1,24 @@
 <script type='application/ld+json'>
     <%= @post.json_ld |> raw() %>
 </script>
+<main class="container  mx-auto scroll-my-12 overflow-auto p-4 print:p-12 md:p-16">
+  <section class="mx-auto w-full max-w-2xl space-y-8 bg-white ">
+      <.link href={~p"/blog"}>← All posts</.link>
 
-<.link href={~p"/blog"}>← All posts</.link>
 
-<h1><%= @post.title %></h1>
+      <p>
+        <time><%= @post.date %></time> by <%= @post.author %>
+      </p>
 
-<p>
-  <time><%= @post.date %></time> by <%= @post.author %>
-</p>
+      <div class="pt-4">
+        <%=for tag <- @post.tags do %>
+          <.tag text={tag} variant="secondary" />
+          <% end %>
+      </div>
+      <article class="markdown">
+        <h1><%= @post.title %></h1>
 
-<p>
-  Tagged as <%= Enum.join(@post.tags, ", ") %>
-</p>
-
-<%= raw(@post.body) %>
+        <%= raw(@post.body) %>
+      </article>
+  </section>
+</main>

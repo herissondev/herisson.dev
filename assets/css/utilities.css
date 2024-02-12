@@ -1,0 +1,55 @@
+@layer utilities {
+    /* A set of reusable classes */
+
+    .bg-editor {
+        background-color: #282c34;
+    }
+
+    body[data-editor-theme="light"] .bg-editor {
+        background-color: #fafafa;
+    }
+
+    .text-editor {
+        color: #c4cad6;
+    }
+
+    .font-editor {
+        font-size: 14px;
+    }
+
+    .shadow-xl-center {
+        box-shadow:
+            0 0 25px -5px rgba(0, 0, 0, 0.1),
+            0 0 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    .shadow-custom-1 {
+        box-shadow: 10px 5px 25px -8px rgba(0, 0, 0, 0.2);
+    }
+
+    .flip-horizontally {
+        transform: scaleY(-1);
+    }
+
+    /* Animations */
+
+    .delay-200 {
+        animation: delay-frames 200ms;
+    }
+
+    @keyframes delay-frames {
+        0% {
+            opacity: 0;
+            height: 0;
+            width: 0;
+        }
+
+        99% {
+            opacity: 0;
+            height: 0;
+            width: 0;
+        }
+
+        100% {}
+    }
+}

@@ -1,163 +1,447 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+@import "./markdown.css";
+@import "./components.css";
+@import "./utilities.css";
 
 
 /* This file is for your main application CSS */
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 224 71.4% 4.1%;
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 224 71.4% 4.1%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 224 71.4% 4.1%;
+        --card: 0 0% 100%;
+        --card-foreground: 224 71.4% 4.1%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 224 71.4% 4.1%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 224 71.4% 4.1%;
 
-    --primary: 220.9 39.3% 11%;
-    --primary-foreground: 210 20% 98%;
+        --primary: 220.9 39.3% 11%;
+        --primary-foreground: 210 20% 98%;
 
-    --secondary: 220 14.3% 95.9%;
-    --secondary-foreground: 220.9 39.3% 11%;
+        --secondary: 220 14.3% 95.9%;
+        --secondary-foreground: 220.9 39.3% 11%;
 
-    --muted: 220 14.3% 95.9%;
-    --muted-foreground: 220 8.9% 46.1%;
+        --muted: 220 14.3% 95.9%;
+        --muted-foreground: 220 8.9% 46.1%;
 
-    --accent: 220 14.3% 95.9%;
-    --accent-foreground: 220.9 39.3% 11%;
+        --accent: 220 14.3% 95.9%;
+        --accent-foreground: 220.9 39.3% 11%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 20% 98%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 210 20% 98%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 224 71.4% 4.1%;
+        --border: 220 13% 91%;
+        --input: 220 13% 91%;
+        --ring: 224 71.4% 4.1%;
 
-    --radius: 0.5rem;
-  }
+        --radius: 0.5rem;
+    }
 
-  .dark {
-    --background: 224 71.4% 4.1%;
-    --foreground: 210 20% 98%;
+    .dark {
+        --background: 224 71.4% 4.1%;
+        --foreground: 210 20% 98%;
 
-    --card: 224 71.4% 4.1%;
-    --card-foreground: 210 20% 98%;
+        --card: 224 71.4% 4.1%;
+        --card-foreground: 210 20% 98%;
 
-    --popover: 224 71.4% 4.1%;
-    --popover-foreground: 210 20% 98%;
+        --popover: 224 71.4% 4.1%;
+        --popover-foreground: 210 20% 98%;
 
-    --primary: 210 20% 98%;
-    --primary-foreground: 220.9 39.3% 11%;
+        --primary: 210 20% 98%;
+        --primary-foreground: 220.9 39.3% 11%;
 
-    --secondary: 215 27.9% 16.9%;
-    --secondary-foreground: 210 20% 98%;
+        --secondary: 215 27.9% 16.9%;
+        --secondary-foreground: 210 20% 98%;
 
-    --muted: 215 27.9% 16.9%;
-    --muted-foreground: 217.9 10.6% 64.9%;
+        --muted: 215 27.9% 16.9%;
+        --muted-foreground: 217.9 10.6% 64.9%;
 
-    --accent: 215 27.9% 16.9%;
-    --accent-foreground: 210 20% 98%;
+        --accent: 215 27.9% 16.9%;
+        --accent-foreground: 210 20% 98%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 20% 98%;
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 210 20% 98%;
 
-    --border: 215 27.9% 16.9%;
-    --input: 215 27.9% 16.9%;
-    --ring: 216 12.2% 83.9%;
-  }
+        --border: 215 27.9% 16.9%;
+        --input: 215 27.9% 16.9%;
+        --ring: 216 12.2% 83.9%;
+    }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+    }
 }
 
 .print-force-new-page {
-  page-break-before: always;
-}
-/* MAKEUP NIMBLE PUBLISHER */
-pre {
-  padding: 10px;
-  border: 1px solid #999999;
-  border-radius: 7px;
-}
-.makeup .hll {background-color: #ffffcc}
-.makeup {background-color: #ffffff}.makeup .unselectable {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+    page-break-before: always;
 }
 
-.makeup .bp {color: #999999; } /* :name_builtin_pseudo */
-.makeup .c {color: #999988; font-style: italic; } /* :comment */
-.makeup .c1 {color: #999988; font-style: italic; } /* :comment_single */
-.makeup .ch {color: #999988; font-style: italic; } /* :comment_hashbang */
-.makeup .cm {color: #999988; font-style: italic; } /* :comment_multiline */
-.makeup .cp {color: #999999; font-style: normal; font-weight: bold; } /* :comment_preproc */
-.makeup .cpf {color: #999999; font-style: normal; font-weight: bold; } /* :comment_preproc_file */
-.makeup .cs {color: #999999; font-style: italic; font-weight: bold; } /* :comment_special */
-.makeup .dl {color: #bb8844; } /* :string_delimiter */
-.makeup .err {color: #a61717; background-color: #e3d2d2; } /* :error */
-.makeup .fm {color: #990000; font-weight: bold; } /* :name_function_magic */
-.makeup .gd {color: #000000; background-color: #ffdddd; } /* :generic_deleted */
-.makeup .ge {font-style: italic; } /* :generic_emph */
-.makeup .gh {color: #999999; } /* :generic_heading */
-.makeup .gi {color: #000000; background-color: #ddffdd; } /* :generic_inserted */
-.makeup .go {color: #888888; } /* :generic_output */
-.makeup .gp {color: #555555; } /* :generic_prompt */
-.makeup .gr {color: #aa0000; } /* :generic_error */
-.makeup .gs {font-weight: bold; } /* :generic_strong */
-.makeup .gt {color: #aa0000; } /* :generic_traceback */
-.makeup .gu {color: #aaaaaa; } /* :generic_subheading */
-.makeup .il {color: #009999; } /* :number_integer_long */
-.makeup .k {font-weight: bold; } /* :keyword */
-.makeup .kc {font-weight: bold; } /* :keyword_constant */
-.makeup .kd {font-weight: bold; } /* :keyword_declaration */
-.makeup .kn {font-weight: bold; } /* :keyword_namespace */
-.makeup .kp {font-weight: bold; } /* :keyword_pseudo */
-.makeup .kr {font-weight: bold; } /* :keyword_reserved */
-.makeup .kt {color: #445588; font-weight: bold; } /* :keyword_type */
-.makeup .m {color: #009999; } /* :number */
-.makeup .mb {color: #009999; } /* :number_bin */
-.makeup .mf {color: #009999; } /* :number_float */
-.makeup .mh {color: #009999; } /* :number_hex */
-.makeup .mi {color: #009999; } /* :number_integer */
-.makeup .mo {color: #009999; } /* :number_oct */
-.makeup .na {color: #008080; } /* :name_attribute */
-.makeup .nb {color: #999999; } /* :name_builtin */
-.makeup .nc {color: #445588; font-weight: bold; } /* :name_class */
-.makeup .ne {color: #990000; font-weight: bold; } /* :name_exception */
-.makeup .nf {color: #990000; font-weight: bold; } /* :name_function */
-.makeup .ni {color: #800080; } /* :name_entity */
-.makeup .nn {color: #555555; } /* :name_namespace */
-.makeup .no {color: #008080; } /* :name_constant */
-.makeup .nt {color: #000080; } /* :name_tag */
-.makeup .nv {color: #008080; } /* :name_variable */
-.makeup .o {font-weight: bold; } /* :operator */
-.makeup .ow {font-weight: bold; } /* :operator_word */
-.makeup .s {color: #bb8844; } /* :string */
-.makeup .s1 {color: #bb8844; } /* :string_single */
-.makeup .s2 {color: #bb8844; } /* :string_double */
-.makeup .sa {color: #bb8844; } /* :string_affix */
-.makeup .sb {color: #bb8844; } /* :string_backtick */
-.makeup .sc {color: #bb8844; } /* :string_char */
-.makeup .sd {color: #bb8844; } /* :string_doc */
-.makeup .se {color: #bb8844; } /* :string_escape */
-.makeup .sh {color: #bb8844; } /* :string_heredoc */
-.makeup .si {color: #bb8844; } /* :string_interpol */
-.makeup .sr {color: #808000; } /* :string_regex */
-.makeup .ss {color: #bb8844; } /* :string_symbol */
-.makeup .sx {color: #bb8844; } /* :string_other */
-.makeup .sx {color: #bb8844; } /* :string_sigil */
-.makeup .vc {color: #008080; } /* :name_variable_class */
-.makeup .vg {color: #008080; } /* :name_variable_global */
-.makeup .vi {color: #008080; } /* :name_variable_instance */
-.makeup .vm {color: #008080; } /* :name_variable_magic */
+/* MAKEUP NIMBLE PUBLISHER */
+.makeup .hll {
+    background-color: #49483e
+}
+
+.makeup {
+    color: #f8f8f2;
+    background-color: #272822
+}
+
+.makeup .unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.makeup .bp {
+    color: #f8f8f2;
+}
+
+/* :name_builtin_pseudo */
+.makeup .c {
+    color: #75715e;
+}
+
+/* :comment */
+.makeup .c1 {
+    color: #75715e;
+}
+
+/* :comment_single */
+.makeup .ch {
+    color: #75715e;
+}
+
+/* :comment_hashbang */
+.makeup .cm {
+    color: #75715e;
+}
+
+/* :comment_multiline */
+.makeup .cp {
+    color: #75715e;
+}
+
+/* :comment_preproc */
+.makeup .cpf {
+    color: #75715e;
+}
+
+/* :comment_preproc_file */
+.makeup .cs {
+    color: #75715e;
+}
+
+/* :comment_special */
+.makeup .dl {
+    color: #e6db74;
+}
+
+/* :string_delimiter */
+.makeup .err {
+    color: #960050;
+    background-color: #1e0010;
+}
+
+/* :error */
+.makeup .fm {
+    color: #a6e22e;
+}
+
+/* :name_function_magic */
+.makeup .gd {
+    color: #f92672;
+}
+
+/* :generic_deleted */
+.makeup .ge {
+    font-style: italic;
+}
+
+/* :generic_emph */
+.makeup .gi {
+    color: #a6e22e;
+}
+
+/* :generic_inserted */
+.makeup .gs {
+    font-weight: bold;
+}
+
+/* :generic_strong */
+.makeup .gu {
+    color: #75715e;
+}
+
+/* :generic_subheading */
+.makeup .il {
+    color: #ae81ff;
+}
+
+/* :number_integer_long */
+.makeup .k {
+    color: #66d9ef;
+}
+
+/* :keyword */
+.makeup .kc {
+    color: #66d9ef;
+}
+
+/* :keyword_constant */
+.makeup .kd {
+    color: #66d9ef;
+}
+
+/* :keyword_declaration */
+.makeup .kn {
+    color: #f92672;
+}
+
+/* :keyword_namespace */
+.makeup .kp {
+    color: #66d9ef;
+}
+
+/* :keyword_pseudo */
+.makeup .kr {
+    color: #66d9ef;
+}
+
+/* :keyword_reserved */
+.makeup .kt {
+    color: #66d9ef;
+}
+
+/* :keyword_type */
+.makeup .l {
+    color: #ae81ff;
+}
+
+/* :literal */
+.makeup .ld {
+    color: #ae81ff;
+}
+
+/* :literal_date */
+.makeup .m {
+    color: #ae81ff;
+}
+
+/* :number */
+.makeup .mb {
+    color: #ae81ff;
+}
+
+/* :number_bin */
+.makeup .mf {
+    color: #ae81ff;
+}
+
+/* :number_float */
+.makeup .mh {
+    color: #ae81ff;
+}
+
+/* :number_hex */
+.makeup .mi {
+    color: #ae81ff;
+}
+
+/* :number_integer */
+.makeup .mo {
+    color: #ae81ff;
+}
+
+/* :number_oct */
+.makeup .n {
+    color: #f8f8f2;
+}
+
+/* :name */
+.makeup .na {
+    color: #a6e22e;
+}
+
+/* :name_attribute */
+.makeup .nb {
+    color: #f8f8f2;
+}
+
+/* :name_builtin */
+.makeup .nc {
+    color: #a6e22e;
+}
+
+/* :name_class */
+.makeup .nd {
+    color: #a6e22e;
+}
+
+/* :name_decorator */
+.makeup .ne {
+    color: #a6e22e;
+}
+
+/* :name_exception */
+.makeup .nf {
+    color: #a6e22e;
+}
+
+/* :name_function */
+.makeup .ni {
+    color: #f8f8f2;
+}
+
+/* :name_entity */
+.makeup .nl {
+    color: #f8f8f2;
+}
+
+/* :name_label */
+.makeup .nn {
+    color: #f8f8f2;
+}
+
+/* :name_namespace */
+.makeup .no {
+    color: #66d9ef;
+}
+
+/* :name_constant */
+.makeup .nt {
+    color: #f92672;
+}
+
+/* :name_tag */
+.makeup .nv {
+    color: #f8f8f2;
+}
+
+/* :name_variable */
+.makeup .nx {
+    color: #a6e22e;
+}
+
+/* :name_other */
+.makeup .o {
+    color: #f92672;
+}
+
+/* :operator */
+.makeup .ow {
+    color: #f92672;
+}
+
+/* :operator_word */
+.makeup .p {
+    color: #f8f8f2;
+}
+
+/* :punctuation */
+.makeup .py {
+    color: #f8f8f2;
+}
+
+/* :name_property */
+.makeup .s {
+    color: #e6db74;
+}
+
+/* :string */
+.makeup .s1 {
+    color: #e6db74;
+}
+
+/* :string_single */
+.makeup .s2 {
+    color: #e6db74;
+}
+
+/* :string_double */
+.makeup .sa {
+    color: #e6db74;
+}
+
+/* :string_affix */
+.makeup .sb {
+    color: #e6db74;
+}
+
+/* :string_backtick */
+.makeup .sc {
+    color: #e6db74;
+}
+
+/* :string_char */
+.makeup .sd {
+    color: #e6db74;
+}
+
+/* :string_doc */
+.makeup .se {
+    color: #ae81ff;
+}
+
+/* :string_escape */
+.makeup .sh {
+    color: #e6db74;
+}
+
+/* :string_heredoc */
+.makeup .si {
+    color: #e6db74;
+}
+
+/* :string_interpol */
+.makeup .sr {
+    color: #e6db74;
+}
+
+/* :string_regex */
+.makeup .ss {
+    color: #e6db74;
+}
+
+/* :string_symbol */
+.makeup .sx {
+    color: #e6db74;
+}
+
+/* :string_other */
+.makeup .sx {
+    color: #e6db74;
+}
+
+/* :string_sigil */
+.makeup .vc {
+    color: #f8f8f2;
+}
+
+/* :name_variable_class */
+.makeup .vg {
+    color: #f8f8f2;
+}
+
+/* :name_variable_global */
+.makeup .vi {
+    color: #f8f8f2;
+}
+
+/* :name_variable_instance */
+.makeup .vm {
+    color: #f8f8f2;
+}
+
+/* :name_variable_magic */

@@ -1,4 +1,4 @@
-<header class="px-4 sm:px-6 lg:px-8">
+<header class="sticky top-0 bg-white px-4 sm:px-6 lg:px-8 z-30">
   <div class="flex items-center justify-between border-b border-zinc-100 py-3 text-sm">
 
     <a href={~p"/"} aria-label="Home">
@@ -12,9 +12,7 @@
     </div>
   </div>
 </header>
-<main class="">
-  <div class="">
-    <.flash_group flash={@flash} />
-    <%= @inner_content %>
-  </div>
-</main>
+
+
+<.flash_group flash={@flash} />
+<%= @inner_content %>
