@@ -1,4 +1,7 @@
 .idea
+.vscode
+.DS_Store
+.formatter.exs
 
 /.github/workflows/k8s/secret.yaml
 
@@ -38,4 +41,3 @@ portfolio-*.tar
 # In case you use Node.js/npm, you want to ignore these.
 npm-debug.log
 /assets/node_modules/
-

@@ -8,13 +8,24 @@ defmodule PortfolioWeb.Router do
     plug :put_root_layout, html: {PortfolioWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug SetLocale, gettext: PortfolioWeb.Gettext, default_locale: "en"
   end
 
   pipeline :api do
     plug :accepts, ["json"]
   end
 
+
+  # I have to replicate the routes so that set_locale can redirect them
   scope "/", PortfolioWeb do
+    pipe_through :browser
+
+    get "/", PageController, :home
+    get "/blog", BlogController, :index
+    get "/blog/:id", BlogController, :show
+  end
+
+  scope "/:locale", PortfolioWeb do
     pipe_through :browser
 
     get "/", PageController, :home

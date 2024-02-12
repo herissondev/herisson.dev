@@ -22,6 +22,11 @@ config :portfolio, PortfolioWeb.Endpoint,
   pubsub_server: Portfolio.PubSub,
   live_view: [signing_salt: "NDegzsJY"]
 
+# Configures I18n
+config :portfolio, PortfolioWeb.Gettext,
+  default_locale: "en",
+  locales: ["en", "fr"]
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails

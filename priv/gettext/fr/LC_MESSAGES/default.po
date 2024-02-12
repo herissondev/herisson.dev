@@ -16,7 +16,7 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
-#: lib/portfolio_web/controllers/blog_html/index.html.heex:15
+#: lib/portfolio_web/controllers/blog_html/index.html.heex:14
 #, elixir-autogen, elixir-format
 msgid "Last Posts"
 msgstr "Derniers posts"
@@ -31,3 +31,18 @@ msgstr "Petit blog pour partager quelques expérimentations"
 #, elixir-autogen, elixir-format
 msgid "close"
 msgstr "fermer"
+
+#: lib/portfolio_web/controllers/page_html/home.html.heex:39
+#, elixir-autogen, elixir-format
+msgid "Education"
+msgstr "Formation"
+
+#: lib/portfolio_web/controllers/page_html/home.html.heex:32
+#, elixir-autogen, elixir-format
+msgid "Experiences"
+msgstr "Expériences"
+
+#: lib/portfolio_web/controllers/page_html/home.html.heex:45
+#, elixir-autogen, elixir-format
+msgid "Projects"
+msgstr "Projets"

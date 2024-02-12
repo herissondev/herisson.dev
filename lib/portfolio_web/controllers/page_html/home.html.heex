@@ -29,20 +29,20 @@
     <!--   </p> -->
     <!-- </.section> -->
     <.section>
-      <h2 class="text-xl font-bold">Expérience</h2>
+      <h2 class="text-xl font-bold"><%= gettext "Experiences" %></h2>
       <%= for exp <- @cv.experiences do %>
         <.event title={exp.title} date={exp.date} job_title={exp.job_title} summary={exp.summary} skills={exp.skills}
           link={Map.get(exp, :link)} />
         <% end %>
     </.section>
     <.section>
-      <h2 class="text-xl font-bold">Formation</h2>
+      <h2 class="text-xl font-bold"><%= gettext "Education" %></h2>
       <%= for exp <- @cv.formations do %>
         <.event title={exp.title} job_title={exp.job_title} date={exp.date} summary={exp.summary} />
         <% end %>
     </.section>
     <.section class="">
-      <h2 class="text-xl font-bold">Projets</h2>
+      <h2 class="text-xl font-bold"><%= gettext "Projects" %></h2>
       <div class="grid grid-cols-2 md:grid-cols-3 gap-4 w-full">
         <%= for projet <- @cv.projects do %>
           <.project title={projet.title} description={projet.description} tags={projet.tags} link={Map.get(projet,
