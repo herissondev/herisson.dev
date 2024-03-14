@@ -54,7 +54,8 @@ defmodule Portfolio.MixProject do
       {:nimble_publisher, "~> 0.1.1"},
       {:makeup_elixir, ">= 0.0.0"},
       {:makeup_erlang, ">= 0.0.0"},
-      {:set_locale, "~> 0.2.1"}
+      {:set_locale, "~> 0.2.1"},
+      {:image, "~> 0.37"}
     ]
   end
 

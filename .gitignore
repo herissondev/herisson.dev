@@ -41,3 +41,7 @@ portfolio-*.tar
 # In case you use Node.js/npm, you want to ignore these.
 npm-debug.log
 /assets/node_modules/
+
+# posts images
+/priv/static/assets/
+/priv/static/images/posts/*/*.open-graph.png

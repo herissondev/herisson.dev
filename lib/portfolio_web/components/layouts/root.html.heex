@@ -9,6 +9,14 @@
     <.live_title suffix=" · Herisson">
       <%= assigns[:page_title] || "Herisson" %>
     </.live_title>
+
+    <%= if assigns[:post] do %>
+      <meta property="og:type" content="article" />
+      <meta property="og:image" content={url(~p"/images/posts/#{@post.og_image.year}/#{@post.og_image.basename}")} />
+      <meta property="twitter:card" content="summary_large_image" />
+      <meta property="twitter:image" content={url(~p"/images/posts/#{@post.og_image.year}/#{@post.og_image.basename}")} />
+    <% end %>
+
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
