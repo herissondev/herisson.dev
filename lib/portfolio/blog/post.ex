@@ -13,7 +13,6 @@ defmodule Portfolio.Blog.Post do
 
 
   def post_json_ld(attrs, date) do
-
     """
     {
           "@context": "https://schema.org",

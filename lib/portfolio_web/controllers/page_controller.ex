@@ -71,6 +71,12 @@ defmodule PortfolioWeb.PageController do
           ],
           projects: [
             %{
+              title: "AI Recipe",
+              description: "Making recipes using AI to showcase the power of Intructor (Structured LLM output)",
+              tags: ["Elixir", "Instructor", "JSON", "OPENAI"],
+              link: "https://recipe.herisson.dev/"
+            },
+            %{
               title: "CloudFlow",
               description: "Creation of a company to sell industrial management software.",
               tags: ["Monorepo", "Kubernetes", "Django", "Next.js"],
