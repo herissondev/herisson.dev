@@ -9,15 +9,39 @@
           <%= @cv.about %>
         </p>
         <p class="max-w-md items-center text-pretty font-mono text-xs text-muted-foreground">
-          <a class="inline-flex gap-x-1.5 align-baseline leading-none hover:underline" href="" target="_blank">
+          <a
+            class="inline-flex gap-x-1.5 align-baseline leading-none hover:underline"
+            href=""
+            target="_blank"
+          >
             <%= @cv.location %>
           </a>
         </p>
         <div class="flex gap-x-1 pt-1 font-mono text-sm text-muted-foreground print:hidden">
-          <.icon_link href={"mailto:#{@cv.social.email}"} icon="hero-envelope" target="_blank" label={"Mail contact"}/>
-          <.icon_link href={"tel:#{@cv.social.phone}"} icon="hero-phone" target="_blank" label={"Phone contact"}/>
-          <.icon_link href={@cv.social.linkedin_link} icon="linkedin" target="_blank" label={"Linkedin profile"} />
-          <.icon_link href={@cv.social.github_link} icon="github" target="_blank" label={"Github profile"}/>
+          <.icon_link
+            href={"mailto:#{@cv.social.email}"}
+            icon="hero-envelope"
+            target="_blank"
+            label="Mail contact"
+          />
+          <.icon_link
+            href={"tel:#{@cv.social.phone}"}
+            icon="hero-phone"
+            target="_blank"
+            label="Phone contact"
+          />
+          <.icon_link
+            href={@cv.social.linkedin_link}
+            icon="linkedin"
+            target="_blank"
+            label="Linkedin profile"
+          />
+          <.icon_link
+            href={@cv.social.github_link}
+            icon="github"
+            target="_blank"
+            label="Github profile"
+          />
         </div>
       </div>
       <.avatar image={~p"/images/moi_profile.jpeg"} />
@@ -25,29 +49,44 @@
     <!-- <.section> -->
     <!--   <h2 class="text-xl font-bold">À propos</h2> -->
     <!--   <p class="text-pretty font-mono text-sm text-muted-foreground"> -->
-    <!--     <%= @cv.summary %> -->
+    <!-- <%= @cv.summary %> -->
     <!--   </p> -->
     <!-- </.section> -->
     <.section>
-      <h2 class="text-xl font-bold"><%= gettext "Experiences" %></h2>
+      <h2 class="text-xl font-bold"><%= gettext("Experiences") %></h2>
       <%= for exp <- @cv.experiences do %>
-        <.event title={exp.title} date={exp.date} job_title={exp.job_title} summary={exp.summary} skills={exp.skills}
-          link={Map.get(exp, :link)} />
-        <% end %>
+        <.event
+          title={exp.title}
+          date={exp.date}
+          job_title={exp.job_title}
+          summary={exp.summary}
+          skills={exp.skills}
+          link={Map.get(exp, :link)}
+        />
+      <% end %>
     </.section>
     <.section>
-      <h2 class="text-xl font-bold"><%= gettext "Education" %></h2>
+      <h2 class="text-xl font-bold"><%= gettext("Education") %></h2>
       <%= for exp <- @cv.formations do %>
         <.event title={exp.title} job_title={exp.job_title} date={exp.date} summary={exp.summary} />
-        <% end %>
+      <% end %>
     </.section>
     <.section class="">
-      <h2 class="text-xl font-bold"><%= gettext "Projects" %></h2>
+      <h2 class="text-xl font-bold"><%= gettext("Projects") %></h2>
       <div class="grid grid-cols-2 md:grid-cols-3 gap-4 w-full">
         <%= for projet <- @cv.projects do %>
-          <.project title={projet.title} description={projet.description} tags={projet.tags} link={Map.get(projet,
-            :link)} />
-          <% end %>
+          <.project
+            title={projet.title}
+            description={projet.description}
+            tags={projet.tags}
+            link={
+              Map.get(
+                projet,
+                :link
+              )
+            }
+          />
+        <% end %>
       </div>
     </.section>
 

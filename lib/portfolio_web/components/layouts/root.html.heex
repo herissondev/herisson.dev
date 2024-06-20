@@ -4,7 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content={get_csrf_token()} />
-    <meta name="description" content="Développeur informatique en devenir ! Passionné par les nouvelles technologies, j'aspire à maitriser la chaine de développement complète. Aimé Risson.">
+    <meta
+      name="description"
+      content="Développeur informatique en devenir ! Passionné par les nouvelles technologies, j'aspire à maitriser la chaine de développement complète. Aimé Risson."
+    />
 
     <.live_title suffix=" · Herisson">
       <%= assigns[:page_title] || "Herisson" %>
@@ -12,28 +15,40 @@
 
     <%= if assigns[:post] do %>
       <meta property="og:type" content="article" />
-      <meta property="og:image" content={url(~p"/images/posts/#{@post.og_image.year}/#{@post.og_image.basename}")} />
+      <meta
+        property="og:image"
+        content={url(~p"/images/posts/#{@post.og_image.year}/#{@post.og_image.basename}")}
+      />
       <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:image" content={url(~p"/images/posts/#{@post.og_image.year}/#{@post.og_image.basename}")} />
+      <meta
+        property="twitter:image"
+        content={url(~p"/images/posts/#{@post.og_image.year}/#{@post.og_image.basename}")}
+      />
     <% end %>
 
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
-    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "5687f960d50240328ca44075ef74d667"}'></script>
+    <!-- Cloudflare Web Analytics -->
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "5687f960d50240328ca44075ef74d667"}'
+    >
+    </script>
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
     <script type="application/ld+json">
-    {
-      "@context" : "https://schema.org",
-      "@type" : "WebSite",
-      "name" : "Herisson.dev",
-      "alternateName" : ["Herisson dev blog", "Aimé Risson", "Blog Aimé Risson", "Blog Dev Aimé Risson", "Blog AR" ],
-      "url" : "https://herisson.dev"
-    }
-  </script>
-  <script>
+      {
+        "@context" : "https://schema.org",
+        "@type" : "WebSite",
+        "name" : "Herisson.dev",
+        "alternateName" : ["Herisson dev blog", "Aimé Risson", "Blog Aimé Risson", "Blog Dev Aimé Risson", "Blog AR" ],
+        "url" : "https://herisson.dev"
+      }
+    </script>
+    <script>
       !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
       posthog.init('phc_4ZoUNBDiYY4mh7WkQw0cH21QDHs7OgbN7gv2KWcrfiE',{api_host:'https://eu.posthog.com'})
-  </script>
+    </script>
   </head>
   <body class="bg-white antialiased">
     <%= @inner_content %>

@@ -6,45 +6,41 @@
           Blog
         </h1>
         <p class="text-pretty font-mono text-sm text-muted-foreground">
-          <%= gettext "Tiny blog to share some experiments" %> :)
+          <%= gettext("Tiny blog to share some experiments") %> :)
         </p>
       </div>
     </div>
     <.section>
-      <h2 class="text-xl font-bold"><%= gettext "Last Posts" %></h2>
+      <h2 class="text-xl font-bold"><%= gettext("Last Posts") %></h2>
+
       <%= for post <- @posts do %>
-        <div id="{post.id}" class="pt-4 border-t mb-6">
-          <div class="flex flex-col md:flex-row md:gap-4">
-            <p class="text-muted-foreground text-sm tabular-nums md:border-r-2 pr-4 min-w-md ">
-              <%= post.date %>
-            </p>
-
-            <div class="flex flex-col ">
-              <h3 class="text-large font-semibold gr-1 leading-none underline">
-                <a href={~p"/blog/#{post.id}"}>
-                  <%= post.title %>
-                </a>
-
-
-              </h3>
-              <p class="text-pretty font-mono text-sm text-muted-foreground">
-                <%= raw(post.description) %>
+        <%= if post.id != "redesk" do %>
+          <div id="{post.id}" class="pt-4 border-t mb-6">
+            <div class="flex flex-col md:flex-row md:gap-4">
+              <p class="text-muted-foreground text-sm tabular-nums md:border-r-2 pr-4 min-w-md ">
+                <%= post.date %>
               </p>
 
+              <div class="flex flex-col ">
+                <h3 class="text-large font-semibold gr-1 leading-none underline">
+                  <a href={~p"/blog/#{post.id}"}>
+                    <%= post.title %>
+                  </a>
+                </h3>
+                <p class="text-pretty font-mono text-sm text-muted-foreground">
+                  <%= raw(post.description) %>
+                </p>
 
-              <div class="pt-4">
-                <%=for tag <- post.tags do %>
-                  <.tag text={tag} variant="secondary" />
+                <div class="pt-4">
+                  <%= for tag <- post.tags do %>
+                    <.tag text={tag} variant="secondary" />
                   <% end %>
+                </div>
               </div>
-
-
             </div>
           </div>
-
-        </div>
         <% end %>
-
+      <% end %>
     </.section>
   </section>
 </main>

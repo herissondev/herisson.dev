@@ -1,18 +1,25 @@
 <header class="sticky top-0 bg-white px-4 sm:px-6 lg:px-8 z-30">
   <div class="flex items-center justify-between border-b border-zinc-100 py-3 text-sm">
-
     <a href={~p"/"} aria-label="Home">
       <img src={~p"/images/herisson.png"} width="36" alt="Hedgehog logo" />
     </a>
 
     <div class="flex items-center gap-4 font-semibold leading-6 text-zinc-900">
-      <a href={~p"/blog"} class={"font-bold hover:text-zinc-700 #{if @page_title == "Blog", do: "underline"}" }>
+      <a
+        href={~p"/blog"}
+        class={"font-bold hover:text-zinc-700 #{if @page_title == "Blog", do: "underline"}" }
+      >
         Blog
+      </a>
+      <a
+        href={~p"/but"}
+        class={"font-bold hover:text-zinc-700 #{if @page_title == "Compétences", do: "underline"}" }
+      >
+        Compétences
       </a>
     </div>
   </div>
 </header>
-
 
 <.flash_group flash={@flash} />
 <%= @inner_content %>
