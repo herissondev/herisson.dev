@@ -14,12 +14,24 @@ So I looked into what's possible and I found out about meta's [Segment Anything 
 
 It's an image segmentation model that can take a bounding box as input to select the object within that box.  It can be used to produce a mask and once removed form the original image **boom** we have our own removebg.
 
-As I had never worked with machine learning models in Elixir (or any other languages actually) I decided to give it a try.
+## Running models on the BEAM
 
+As I had never worked with machine learning models in Elixir (or any other languages actually) I decided to give it a try an run the model on the BEAM!
 
-This is my attempt into running [Segment Anything Model](https://github.com/facebookresearch/segment-anything) (SAM) from facebook research using the [Ortex](https://github.com/elixir-nx/ortex) library to run ONNX models.
+Elixir's [bumblebee library](https://github.com/elixir-nx/bumblebee) offers a high-level API similar to Python's transformers. It includes some image-related APIs but lacks support for image classification yet so it won't be that easy !
 
-Please note that this is my first time using Nx/Ortex/Onnx.
+Of course the Nx team thought of that and provided us with a library called [Ortex](https://github.com/elixir-nx/ortex)
+> Ortex allows for easy loading and fast inference of ONNX models using different backends available to ONNX Runtime such as CUDA, TensorRT, Core ML, and ARM Compute Library.
+
+For those unaware, ONNX models represent a universal format for machine learning models that can be exported from major ML libraries like PyTorch and TensorFlow.
+
+## Lets start coding :)
+
+> If you want you can directly [run this livebook](https://livebook.dev/run/?url=https%3A%2F%2Fraw.githubusercontent.com%2Felixir-image%2Fimage%2Fmain%2Flivebook%2Fsement_anything.livemd) that @kip made out of or elixir forum discussion.
+
+SAM and other image models typically begin by transforming images into embeddings, which are then inputted into the segmentation model. These will be referred to as encoder/decoder models.
+
+Please note that this is my first time using Nx/Ortex/Onnx so i might make silly mistakes.
 
 I'm more or less trying to port this jupyter notebook example to livebook: https://github.com/facebookresearch/segment-anything
 

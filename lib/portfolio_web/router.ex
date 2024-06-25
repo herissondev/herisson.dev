@@ -15,15 +15,11 @@ defmodule PortfolioWeb.Router do
     plug :accepts, ["json"]
   end
 
-  # I have to replicate the routes so that set_locale can redirect them
+  # # I have to replicate the routes so that set_locale can redirect them
   scope "/", PortfolioWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
-    get "/blog", BlogController, :index
-    get "/blog/:id", BlogController, :show
-    get "/but", CompetenceController, :index
-    get "/but/:id", CompetenceController, :show
+    get "/", PageController, :dummy_redirect
   end
 
   scope "/:locale", PortfolioWeb do
@@ -32,8 +28,6 @@ defmodule PortfolioWeb.Router do
     get "/", PageController, :home
     get "/blog", BlogController, :index
     get "/blog/:id", BlogController, :show
-    get "/but", CompetenceController, :index
-    get "/but/:id", CompetenceController, :show
   end
 
   # Other scopes may use custom stacks.

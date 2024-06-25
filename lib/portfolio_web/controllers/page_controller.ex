@@ -25,7 +25,6 @@ defmodule PortfolioWeb.PageController do
         %{
           title: "Mobile / Backend development - Redesk",
           job_title: "Fullstack Development Internship",
-          link: "/fr/blog/redesk",
           date: "April - July 2024",
           skills: ["Django", "CI/CD", "React Native", "Docker", "Expo"],
           description: "",
@@ -155,7 +154,6 @@ defmodule PortfolioWeb.PageController do
         %{
           title: "Développement Mobile / Backend - Redesk",
           job_title: "Stage en développement Fullstack",
-          link: "/fr/blog/redesk",
           date: "Avril - Juillet 2024",
           skills: ["Django", "CI/CD", "React Native", "Docker", "Expo"],
           description: "",

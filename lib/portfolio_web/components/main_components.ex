@@ -108,6 +108,7 @@ defmodule PortfolioWeb.MainComponents do
         <div class="flex flex-col-reverse md:flex-row w-full justify-between">
           <a
             href={@link}
+            target="_blank"
             class={"font-semibold gr-1  leading-none #{if @link != nil, do: " underline"}"}
           >
             <%= @title %>
