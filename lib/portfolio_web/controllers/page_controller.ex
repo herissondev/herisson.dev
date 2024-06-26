@@ -19,6 +19,11 @@ defmodule PortfolioWeb.PageController do
       about:
         "Aspiring computer developer! Passionate about new technologies, I aspire to master the entire development chain.",
       location: "Lyon, France",
+      work_note: %{
+        title: "Open for Remote Freelance Opportunities:",
+        content:
+          "Currently available for short to mid-term remote projects. Specializing in full-stack development, with a focus on Django + Vue.js or Elixir. Flexible on all aspects. Prefer asynchronous communication with minimal meetings."
+      },
       summary:
         "Currently in a Bachelor of Computer Science at IUT Lyon 1, I am looking for a 2-month internship in backend development.",
       experiences: [
@@ -148,6 +153,11 @@ defmodule PortfolioWeb.PageController do
       about:
         "Développeur informatique en devenir ! Passionné par les nouvelles technologies, j'aspire à maitriser la chaine de développement complète.",
       location: "Lyon, France",
+      work_note: %{
+        title: "Ouvert aux opportunités de freelance à distance :",
+        content:
+          "Actuellement disponible pour des projets à distance de courte à moyenne durée. Spécialisé en développement full-stack, avec un focus sur Django + Vue.js ou Elixir. Flexible sur tous les aspects. Préfère une communication asynchrone avec un minimum de réunions."
+      },
       summary:
         "Actuellement en BUT Informatique à l'IUT Lyon 1, je suis à la recherche d'un stage de 2 mois en développement backend.",
       experiences: [

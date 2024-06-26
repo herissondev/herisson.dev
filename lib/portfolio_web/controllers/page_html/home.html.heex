@@ -52,12 +52,27 @@
       </div>
       <.avatar image={~p"/images/moi_profile.jpeg"} />
     </div>
-    <!-- <.section> -->
-    <!--   <h2 class="text-xl font-bold">À propos</h2> -->
-    <!--   <p class="text-pretty font-mono text-sm text-muted-foreground"> -->
-    <!-- <%= @cv.summary %> -->
-    <!--   </p> -->
-    <!-- </.section> -->
+    <a
+      href="https://www.malt.fr/profile/herisson"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="block"
+    >
+      <div class="flex flex-col  p-3 border rounded hover:border-gray-400">
+        <div class="flex flex-row justify-between">
+          <p class="text-sm font-semibold leading-none mb-1"><%= @cv.work_note.title %></p>
+          <div class="flex justify-end">
+            <.custom_icon
+              icon="malt"
+              href="https://www.malt.fr/profile/herisson"
+              label="Malt profile"
+              variant=""
+            />
+          </div>
+        </div>
+        <p class="text-xs font-mono text-muted-foreground"><%= @cv.work_note.content %></p>
+      </div>
+    </a>
     <.section>
       <h2 class="text-xl font-bold"><%= gettext("Experiences") %></h2>
       <%= for exp <- @cv.experiences do %>

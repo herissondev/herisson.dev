@@ -148,7 +148,7 @@ defmodule PortfolioWeb.MainComponents do
   defp tag_variant("outline"), do: "text-foreground"
   attr(:icon, :string, required: true)
 
-  defp custom_icon(%{icon: "linkedin" <> _} = assigns) do
+  def custom_icon(%{icon: "linkedin" <> _} = assigns) do
     ~H"""
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -166,7 +166,7 @@ defmodule PortfolioWeb.MainComponents do
     """
   end
 
-  defp custom_icon(%{icon: "github" <> _} = assigns) do
+  def custom_icon(%{icon: "github" <> _} = assigns) do
     ~H"""
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -184,7 +184,7 @@ defmodule PortfolioWeb.MainComponents do
     """
   end
 
-  defp custom_icon(%{icon: "malt" <> _} = assigns) do
+  def custom_icon(%{icon: "malt" <> _} = assigns) do
     ~H"""
     <svg wwidth="20" height="20" viewBox="0 0 338 338" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
