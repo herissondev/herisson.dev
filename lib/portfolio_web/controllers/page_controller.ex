@@ -17,12 +17,12 @@ defmodule PortfolioWeb.PageController do
         linkedin_link: "https://www.linkedin.com/in/aime-risson/"
       },
       about:
-        "Aspiring computer developer! Passionate about new technologies, I aspire to master the entire development chain.",
+        "Passionate about new technologies, I aspire to master the entire development chain.",
       location: "Lyon, France",
       work_note: %{
         title: "Open for Remote Freelance Opportunities:",
         content:
-          "Currently available for short to mid-term remote projects. Specializing in full-stack development, with a focus on Django + Vue.js or Elixir. Flexible on all aspects. Prefer asynchronous communication with minimal meetings."
+          "Currently available for short to mid-term remote projects. Specializing in full-stack development, with a focus on Django, Vue.js, React, React Native or Elixir. Flexible on all aspects. Prefer asynchronous communication with minimal meetings."
       },
       summary:
         "Currently in a Bachelor of Computer Science at IUT Lyon 1, I am looking for a 2-month internship in backend development.",
@@ -77,7 +77,7 @@ defmodule PortfolioWeb.PageController do
         },
         %{
           title: "Bachelor of Computer Science - IUT Lyon 1",
-          job_title: nil,
+          job_title: "Major of promotion - Valedictorian",
           date: "2022 - 2025",
           skills: [],
           description: "",
@@ -151,12 +151,12 @@ defmodule PortfolioWeb.PageController do
         linkedin_link: "https://www.linkedin.com/in/aime-risson/"
       },
       about:
-        "Développeur informatique en devenir ! Passionné par les nouvelles technologies, j'aspire à maitriser la chaine de développement complète.",
+        "Passionné par les nouvelles technologies, j'aspire à maitriser la chaine de développement complète.",
       location: "Lyon, France",
       work_note: %{
         title: "Ouvert aux opportunités de freelance à distance :",
         content:
-          "Actuellement disponible pour des projets à distance de courte à moyenne durée. Spécialisé en développement full-stack, avec un focus sur Django + Vue.js ou Elixir. Flexible sur tous les aspects. Préfère une communication asynchrone avec un minimum de réunions."
+          "Actuellement disponible pour des projets à distance de courte à moyenne durée. Spécialisé en développement full-stack, avec un focus sur Django, Vue.js, React, React Native ou Elixir. Flexible sur tous les aspects. Préfère une communication asynchrone avec un minimum de réunions."
       },
       summary:
         "Actuellement en BUT Informatique à l'IUT Lyon 1, je suis à la recherche d'un stage de 2 mois en développement backend.",
@@ -168,7 +168,7 @@ defmodule PortfolioWeb.PageController do
           skills: ["Django", "CI/CD", "React Native", "Docker", "Expo"],
           description: "",
           summary:
-            "Développé une application complète react native offline first et le backend from scratch en utilisant Expo et Django."
+            "Développement d'une application react native offline first ainsi que la refonte du backend en utilisant respectivement Expo et Django Rest."
         },
         %{
           title: "Développement d'un interpréteur - Archethic",
@@ -211,7 +211,7 @@ defmodule PortfolioWeb.PageController do
         },
         %{
           title: "BUT informatique - IUT Lyon 1",
-          job_title: nil,
+          job_title: "Major de promotion",
           date: "2022 - 2025",
           skills: [],
           description: "",
@@ -227,6 +227,13 @@ defmodule PortfolioWeb.PageController do
         }
       ],
       projects: [
+        %{
+          title: "Recette AI",
+          description:
+            "Créer des recettes en utilisant l'IA pour démontrer la puissance d'Intructor (sortie LLM structurée)",
+          tags: ["Elixir", "Instructor", "JSON", "OPENAI"],
+          link: "https://recipe.herisson.dev/"
+        },
         %{
           title: "CloudFlow",
           description:
