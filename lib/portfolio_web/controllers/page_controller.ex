@@ -22,7 +22,7 @@ defmodule PortfolioWeb.PageController do
       work_note: %{
         title: "Open for Remote Freelance Opportunities:",
         content:
-          "Currently available for short to mid-term remote projects. Specializing in full-stack development, with a focus on Django, Vue.js, React, React Native or Elixir. Flexible on all aspects. Prefer asynchronous communication with minimal meetings."
+          "Currently available for short to mid-term remote projects. Specializing in full-stack development, with a focus on Django, Vue.js, React, React Native or Elixir. Flexible on all aspects."
       },
       summary:
         "Currently in a Bachelor of Computer Science at IUT Lyon 1, I am looking for a 2-month internship in backend development.",
@@ -156,7 +156,7 @@ defmodule PortfolioWeb.PageController do
       work_note: %{
         title: "Ouvert aux opportunités de freelance à distance :",
         content:
-          "Actuellement disponible pour des projets à distance de courte à moyenne durée. Spécialisé en développement full-stack, avec un focus sur Django, Vue.js, React, React Native ou Elixir. Flexible sur tous les aspects. Préfère une communication asynchrone avec un minimum de réunions."
+          "Actuellement disponible pour des projets à distance de courte à moyenne durée. Spécialisé en développement full-stack, avec un focus sur Django, Vue.js, React, React Native ou Elixir. Flexible sur tous les aspects."
       },
       summary:
         "Actuellement en BUT Informatique à l'IUT Lyon 1, je suis à la recherche d'un stage de 2 mois en développement backend.",
@@ -202,7 +202,7 @@ defmodule PortfolioWeb.PageController do
       ],
       formations: [
         %{
-          title: "École d'Ingénieurs en Informatique - ENSIMAG",
+          title: "École d'Ingénieur en Informatique - ENSIMAG",
           job_title: nil,
           date: "2024 - 2027",
           skills: [],
