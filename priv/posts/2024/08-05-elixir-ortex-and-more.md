@@ -29,7 +29,7 @@ ONNX is basically the _universal export format_ for models trained in PyTorch, T
 
 ## Let’s start coding :)
 
-> If you prefer, you can open the ready-made Livebook by @kip: [sement_anything.livemd](https://livebook.dev/run/?url=https%3A%2F%2Fraw.githubusercontent.com%2Felixir-image%2Fimage%2Fmain%2Flivebook%2Fsement_anything.livemd).
+> If you prefer, you can open the ready-made Livebook: [![Run in Livebook](https://livebook.dev/badge/v1/blue.svg)](https://livebook.dev/run?url=https%3A%2F%2Fraw.githubusercontent.com%2Felixir-image%2Fimage%2Frefs%2Fheads%2Fmain%2Flivebook%2Fsegment_anything.livemd).
 
 SAM (and most vision models) is split in two parts:
 
