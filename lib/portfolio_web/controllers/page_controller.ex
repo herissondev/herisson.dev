@@ -17,8 +17,8 @@ defmodule PortfolioWeb.PageController do
         linkedin_link: "https://www.linkedin.com/in/aime-risson/"
       },
       about:
-        "Passionate about new technologies, I aspire to master the entire development chain.",
-      location: "Lyon, France",
+        "Passionate about new technologies, I aim to master the entire development chain while deepening my understanding of the theoretical foundations of the tools and systems I use.",
+      location: "Grenoble, France",
       work_note: %{
         title: "Open for Remote Freelance Opportunities:",
         content:
@@ -28,9 +28,18 @@ defmodule PortfolioWeb.PageController do
         "Currently in a Bachelor of Computer Science at IUT Lyon 1, I am looking for a 2-month internship in backend development.",
       experiences: [
         %{
+          title: "ALEO Hackathon 100K$ - Winner",
+          job_title: "Finance Hackathon",
+          date: "July 2025",
+          skills: ["React", "Leo", "Finance"],
+          description: "",
+          summary:
+            "During this summer, my team and I won a $100K hackathon where we had to implement financial protocols on the ALEO blockchain."
+        },
+        %{
           title: "Mobile / Backend development - Redesk",
-          job_title: "Fullstack Development Internship",
-          date: "April - July 2024",
+          job_title: "Fullstack Development Internship + Freelance",
+          date: "April 2024 - July 2025",
           skills: ["Django", "CI/CD", "React Native", "Docker", "Expo"],
           description: "",
           summary:
@@ -68,12 +77,12 @@ defmodule PortfolioWeb.PageController do
       ],
       formations: [
         %{
-          title: "CS Engeniering School - ENSIMAG",
+          title: "CS Engeniering School - ENSIMAG - M1 MOSIG",
           job_title: nil,
           date: "2024 - 2027",
           skills: [],
-          description: "",
-          summary: ""
+          summary:
+            "Currently enrolled in the joint M1 MOSIG Master program, offered in partnership between ENSIMAG and Université Grenoble Alpes (UGA)."
         },
         %{
           title: "Bachelor of Computer Science - IUT Lyon 1",
@@ -151,8 +160,8 @@ defmodule PortfolioWeb.PageController do
         linkedin_link: "https://www.linkedin.com/in/aime-risson/"
       },
       about:
-        "Passionné par les nouvelles technologies, j'aspire à maitriser la chaine de développement complète.",
-      location: "Lyon, France",
+        "Passionné par les nouvelles technologies, j’aspire à maîtriser l’ensemble de la chaîne de développement, tout en approfondissant les fondements théoriques des outils et des systèmes que j’utilise.",
+      location: "Grenoble, France",
       work_note: %{
         title: "Ouvert aux opportunités de freelance à distance :",
         content:
@@ -161,6 +170,15 @@ defmodule PortfolioWeb.PageController do
       summary:
         "Actuellement en BUT Informatique à l'IUT Lyon 1, je suis à la recherche d'un stage de 2 mois en développement backend.",
       experiences: [
+        %{
+          title: "ALEO Hackathon 100K$ - Gagnant",
+          job_title: "Hackathon Finance",
+          date: "Juillet 2025",
+          skills: ["React", "Leo", "Finance"],
+          description: "",
+          summary:
+            "Cet été, mon équipe et moi avons remporté un hackathon doté de 100 000 $ au cours duquel nous devions implémenter des protocoles financiers sur la blockchain ALEO."
+        },
         %{
           title: "Développement Mobile / Backend - Redesk",
           job_title: "Stage en développement Fullstack",
@@ -207,7 +225,8 @@ defmodule PortfolioWeb.PageController do
           date: "2024 - 2027",
           skills: [],
           description: "",
-          summary: ""
+          summary:
+            "Actuellement inscrit dans le programme conjoint de Master 1 MOSIG, proposé en partenariat entre l’ENSIMAG et l’Université Grenoble Alpes (UGA)."
         },
         %{
           title: "BUT informatique - IUT Lyon 1",

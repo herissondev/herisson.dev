@@ -3,14 +3,14 @@
     "@context": "https://schema.org",
     "@type": "ProfilePage",
     "dateCreated": "2024-06-26T12:00:00+02:00",
-    "dateModified": "2024-06-26T12:00:00+02:00",
+    "dateModified": "2025-10-16T12:00:00+02:00",
     "mainEntity": {
       "@type": "Person",
       "name": "Aimé RISSON",
-      "description": "Aspiring computer developer! Passionate about new technologies, I aspire to master the entire development chain. Open for remote freelance opportunities.",
+      "description": "Passionate about new technologies, I aim to master the entire development chain while deepening my understanding of the theoretical foundations of the tools and systems I use.",
       "jobTitle": "Freelance Full Stack Developer",
       "image": "https://herisson.dev/images/moi_profile.jpeg",
-      "url": "https://herisson.dev",
+      "url": "https://herisson.dev/en",
       "sameAs": [
         "https://www.malt.fr/profile/herisson/",
         "https://www.linkedin.com/in/aime-risson/",
@@ -99,6 +99,13 @@
         <p class="text-xs font-mono text-muted-foreground"><%= @cv.work_note.content %></p>
       </div>
     </a>
+
+    <.section>
+      <h2 class="text-xl font-bold"><%= gettext("Education") %></h2>
+      <%= for exp <- @cv.formations do %>
+        <.event title={exp.title} job_title={exp.job_title} date={exp.date} summary={exp.summary} />
+      <% end %>
+    </.section>
     <.section>
       <h2 class="text-xl font-bold"><%= gettext("Experiences") %></h2>
       <%= for exp <- @cv.experiences do %>
@@ -110,12 +117,6 @@
           skills={exp.skills}
           link={Map.get(exp, :link)}
         />
-      <% end %>
-    </.section>
-    <.section>
-      <h2 class="text-xl font-bold"><%= gettext("Education") %></h2>
-      <%= for exp <- @cv.formations do %>
-        <.event title={exp.title} job_title={exp.job_title} date={exp.date} summary={exp.summary} />
       <% end %>
     </.section>
     <.section class="">
