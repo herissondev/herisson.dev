@@ -81,9 +81,11 @@
         @apply rounded-full bg-white px-3 py-1 leading-5 text-zinc-900;
     }
 
+    /* No rotation for visitors who reduce motion: a full, still gradient border */
     @media (prefers-reduced-motion: reduce) {
         .ai-demo-link::before {
             animation: none;
+            background: linear-gradient(90deg, #5b21b6, #ff8300);
         }
     }
 

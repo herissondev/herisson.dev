@@ -361,7 +361,13 @@ defmodule PortfolioWeb.RecruitingDemo.DemoLive do
                 "border-zinc-900 ring-1 ring-zinc-900"
             ]}
           >
-            <span class="block font-semibold">{cv.name}</span>
+            <span class="flex items-center justify-between gap-2">
+              <span class="font-semibold">{cv.name}</span>
+              <.tag
+                text={if cv.kind == "trap", do: gettext("trap"), else: gettext("classic")}
+                variant={if cv.kind == "trap", do: "destructive", else: "secondary"}
+              />
+            </span>
             <span class="mt-1 block text-sm text-muted-foreground">{template_pitch(cv.template_id)}</span>
           </button>
         </div>
@@ -615,7 +621,6 @@ defmodule PortfolioWeb.RecruitingDemo.DemoLive do
   defp template_pitch("partial"), do: gettext("Half a match: the AI does not decide alone.")
   defp template_pitch("off_topic"), do: gettext("Not a CV at all: rejected at sorting.")
   defp template_pitch("injection"), do: gettext("Hides an order addressed to the AI.")
-  defp template_pitch("protected"), do: gettext("States age and origin: the AI never sees them.")
 
   defp template_pitch("inconsistent"),
     do: gettext("Claims a company nobody can find: the AI checks.")

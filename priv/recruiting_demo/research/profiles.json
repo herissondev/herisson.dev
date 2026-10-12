@@ -16,11 +16,6 @@
       {"claim": "Junior SDR profile, one year of experience", "confirmed": true, "source": "Professional network (simulated)"}
     ]
   },
-  "protected": {
-    "skills": [
-      {"claim": "Speaker at a B2B sales conference on large-account negotiation", "confirmed": true, "source": "Conference website (simulated)"}
-    ]
-  },
   "inconsistent": {
     "skills": [
       {"claim": "Profile mentions Head of Sales, but no colleague lists the company", "confirmed": false, "source": "Professional network (simulated)"}

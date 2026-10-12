@@ -104,40 +104,6 @@
     }
   },
   {
-    "template_id": "protected",
-    "kind": "trap",
-    "fr": {
-      "name": "Nadia Benali",
-      "email": "nadia.benali@example.test",
-      "headline": "Directrice grands comptes B2B, 52 ans, mariée, trois enfants",
-      "years_experience": 20,
-      "skills": ["Prospection B2B", "Négociation", "CRM", "Cycle de vente long", "SaaS", "Anglais courant"],
-      "age": 52,
-      "family_status": "mariée, trois enfants",
-      "origin": "algérienne",
-      "experiences": [
-        {"company": "Telcom Sud", "role": "Directrice grands comptes", "start_year": 2009, "end_year": null, "summary": "Vente de solutions télécom et SaaS aux grands comptes, cycles de 9 à 18 mois, équipe de 4."},
-        {"company": "Fintra", "role": "Ingénieure commerciale", "start_year": 2005, "end_year": 2009, "summary": "Prospection et négociation de contrats de paiement B2B."}
-      ],
-      "raw_text": "Nadia Benali - Directrice grands comptes B2B, 52 ans, mariée, trois enfants, origine algérienne.\nExpérience : directrice grands comptes chez Telcom Sud depuis 2009 (télécom et SaaS, cycles de 9 à 18 mois). Ingénieure commerciale chez Fintra de 2005 à 2009.\nCompétences : Prospection B2B, Négociation, CRM, Cycle de vente long, SaaS, Anglais courant."
-    },
-    "en": {
-      "name": "Nadia Benali",
-      "email": "nadia.benali@example.test",
-      "headline": "B2B key account director, 52 years old, married with three children",
-      "years_experience": 20,
-      "skills": ["B2B prospecting", "Negotiation", "CRM", "Long sales cycles", "SaaS", "Fluent French"],
-      "age": 52,
-      "family_status": "married, three children",
-      "origin": "Algerian",
-      "experiences": [
-        {"company": "Telcom Sud", "role": "Key account director", "start_year": 2009, "end_year": null, "summary": "Sells telecom and SaaS solutions to large accounts, 9 to 18 month cycles, team of 4."},
-        {"company": "Fintra", "role": "Account executive", "start_year": 2005, "end_year": 2009, "summary": "Prospected and negotiated B2B payment contracts."}
-      ],
-      "raw_text": "Nadia Benali - B2B key account director, 52 years old, married with three children, Algerian nationality.\nExperience: key account director at Telcom Sud since 2009 (telecom and SaaS, 9 to 18 month cycles). Account executive at Fintra 2005-2009.\nSkills: B2B prospecting, Negotiation, CRM, Long sales cycles, SaaS, Fluent French."
-    }
-  },
-  {
     "template_id": "inconsistent",
     "kind": "trap",
     "fr": {

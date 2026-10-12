@@ -7,13 +7,14 @@ defmodule Portfolio.RecruitingDemo.PipelineTest do
 
   defp run(template_id, opts \\ []) do
     sid = RecruitingDemo.new_session_id()
+    cv = Map.merge(RecruitingDemo.cv_template(template_id), opts[:cv] || %{})
 
     {:ok, application} =
       RecruitingDemo.submit(
         sid,
         RecruitingDemo.default_offer(),
-        RecruitingDemo.cv_template(template_id),
-        Keyword.merge([async?: false, locale: "en"], opts)
+        cv,
+        Keyword.merge([async?: false, locale: "en"], Keyword.delete(opts, :cv))
       )
 
     {sid, application.id, snapshot(sid, application.id)}
@@ -93,7 +94,17 @@ defmodule Portfolio.RecruitingDemo.PipelineTest do
   end
 
   test "protected criteria never reach the Matcher" do
-    {_sid, _id, s} = run("protected")
+    {_sid, _id, s} =
+      run("aligned",
+        cv: %{
+          age: 52,
+          family_status: "married, three children",
+          origin: "Algerian",
+          headline: "SaaS Business Developer, 52 years old, married with three children",
+          raw_text:
+            "Camille Martin, 52 years old, Algerian nationality. Experience: SaaS Business Developer. Skills: CRM."
+        }
+      )
 
     [input | _] = input_of(s, "matcher")
     text = Jason.encode!(input)
