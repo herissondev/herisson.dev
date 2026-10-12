@@ -26,6 +26,12 @@ config :portfolio, PortfolioWeb.Gettext,
   default_locale: "en",
   locales: ["en", "fr"]
 
+# Recruiting demo (isolated context, see Portfolio.RecruitingDemo)
+config :portfolio, Portfolio.RecruitingDemo,
+  enabled: true,
+  pubsub: Portfolio.PubSub,
+  applications_per_hour: 10
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails

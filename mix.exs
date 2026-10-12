@@ -9,6 +9,7 @@ defmodule Portfolio.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
+      compilers: [:boundary] ++ Mix.compilers(),
       deps: deps(),
       listeners: [Phoenix.CodeReloader]
     ]
@@ -53,7 +54,16 @@ defmodule Portfolio.MixProject do
       {:makeup_elixir, ">= 0.0.0"},
       {:makeup_erlang, ">= 0.0.0"},
       {:set_locale, "~> 0.2.9"},
-      {:image, "~> 0.62"}
+      {:image, "~> 0.62"},
+      {:ash, "~> 3.33"},
+      {:ash_state_machine, "~> 0.2"},
+      {:ash_phoenix, "~> 2.3"},
+      {:ash_ai, "~> 1.1"},
+      {:reactor, "~> 1.0"},
+      {:req, "~> 0.5"},
+      {:req_llm, "~> 1.24"},
+      {:boundary, "~> 0.10", runtime: false},
+      {:hammer, "~> 7.0"}
     ]
   end
 

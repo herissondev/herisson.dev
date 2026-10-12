@@ -11,6 +11,12 @@
       >
         Blog
       </a>
+      <a
+        href={"/#{Gettext.get_locale(PortfolioWeb.Gettext)}/demo/recruiting"}
+        class={"font-bold hover:text-zinc-700 #{if @page_title == gettext("Recruiting demo"), do: "underline"}" }
+      >
+        {gettext("Demo")}
+      </a>
     </div>
   </div>
 </header>

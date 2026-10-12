@@ -1,4 +1,5 @@
 defmodule PortfolioWeb.Endpoint do
+  use Boundary, top_level?: true, deps: [PortfolioWeb, PortfolioWeb.Router]
   use Phoenix.Endpoint, otp_app: :portfolio
 
   # The session will be stored in the cookie and signed,

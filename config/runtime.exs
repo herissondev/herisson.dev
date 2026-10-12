@@ -20,6 +20,11 @@ if System.get_env("PHX_SERVER") do
   config :portfolio, PortfolioWeb.Endpoint, server: true
 end
 
+# Switches the recruiting demo off without a code change: RECRUITING_DEMO_ENABLED=false
+if enabled = System.get_env("RECRUITING_DEMO_ENABLED") do
+  config :portfolio, Portfolio.RecruitingDemo, enabled: enabled in ~w(true 1)
+end
+
 if config_env() == :prod do
   # database_url =
   #   System.get_env("DATABASE_URL") ||
