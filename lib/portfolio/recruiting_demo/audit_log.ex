@@ -102,6 +102,20 @@ defmodule Portfolio.RecruitingDemo.AuditLog do
       context: %{audit_log?: true}
     )
     |> Ash.create()
+    |> tap(fn
+      {:ok, event} -> broadcast(event)
+      _ -> :ok
+    end)
+  end
+
+  defp broadcast(event) do
+    Portfolio.RecruitingDemo.Cleaner.touch(event.session_id)
+
+    Phoenix.PubSub.broadcast(
+      Portfolio.RecruitingDemo.pubsub(),
+      Portfolio.RecruitingDemo.topic(event.session_id),
+      {:recruiting_demo, :event, event}
+    )
   end
 
   defp last_link(application_id) do

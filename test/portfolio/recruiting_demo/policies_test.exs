@@ -35,7 +35,7 @@ defmodule Portfolio.RecruitingDemo.PoliciesTest do
     {CvSubmission, :submit, [:human]},
     {Application, :submit, [:human]},
     {ResearchRequest, :request_verification, [:matcher]},
-    {ResearchResult, :record, [:researcher]},
+    {ResearchResult, :search_profile, [:researcher]},
     {Assessment, :submit_assessment, [:matcher]},
     {EmailDraft, :create_draft, [:writer]},
     {EmailDraft, :edit_draft, [:human]},

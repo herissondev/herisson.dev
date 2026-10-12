@@ -8,7 +8,7 @@ defmodule Portfolio.RecruitingDemo.Resources.ResearchResult do
     data_layer: Ash.DataLayer.Ets,
     authorizers: [Ash.Policy.Authorizer]
 
-  alias Portfolio.RecruitingDemo.Changes.{Audit, SetSession}
+  alias Portfolio.RecruitingDemo.Changes.{Audit, SearchProfile, SetSession}
   alias Portfolio.RecruitingDemo.Checks.ActorRole
   alias Portfolio.RecruitingDemo.Resources.{Application, Finding}
   alias Portfolio.RecruitingDemo.Validations.SameSession
@@ -27,11 +27,17 @@ defmodule Portfolio.RecruitingDemo.Resources.ResearchResult do
   actions do
     defaults [:read]
 
-    create :record do
-      accept [:application_id, :research_request_id, :topic, :findings, :fixture_source]
+    # The simulated research tool: findings are computed from the fixtures
+    create :search_profile do
+      accept [:application_id, :research_request_id, :topic]
+      argument :query, :string
       change SetSession
       validate {SameSession, attribute: :application_id, resource: Application}
-      change {Audit, type: :tool_called, fields: [:topic, :fixture_source]}
+
+      validate one_of(:topic, ["experiences", "companies", "skills", "verification"])
+
+      change SearchProfile
+      change {Audit, type: :tool_called, fields: [:topic, :query, :fixture_source]}
     end
   end
 
@@ -44,7 +50,7 @@ defmodule Portfolio.RecruitingDemo.Resources.ResearchResult do
       authorize_if {ActorRole, roles: [:recruiter, :orchestrator, :researcher, :matcher]}
     end
 
-    policy action(:record) do
+    policy action(:search_profile) do
       authorize_if {ActorRole, roles: [:researcher]}
     end
   end

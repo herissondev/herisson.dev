@@ -1,0 +1,10 @@
+{
+  "title": "Backend Elixir developer",
+  "salary_min": 50000,
+  "salary_max": 65000,
+  "min_years": 3,
+  "required_skills": ["Elixir", "Phoenix", "PostgreSQL", "OTP"],
+  "nice_to_have_skills": ["Ash", "LiveView", "Kubernetes"],
+  "location": "Grenoble",
+  "remote": "hybrid"
+}
