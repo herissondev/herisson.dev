@@ -56,4 +56,40 @@
     .info-box {
         @apply p-4 bg-gray-100 text-sm text-gray-500 font-medium rounded-lg;
     }
+
+    /* "AI agent demo" nav pill: a light runs around the border, paused on hover */
+    .ai-demo-link {
+        @apply relative isolate inline-flex overflow-hidden rounded-full p-[2px] font-bold;
+        background: hsl(var(--border));
+    }
+
+    .ai-demo-link::before {
+        content: "";
+        position: absolute;
+        inset: -150%;
+        z-index: -1;
+        background: conic-gradient(from 0deg, transparent 0deg 220deg, #5b21b6 290deg, #ff8300 340deg, transparent 360deg);
+        animation: ai-demo-spin 3s linear infinite;
+    }
+
+    .ai-demo-link:hover::before,
+    .ai-demo-link:focus-visible::before {
+        animation-play-state: paused;
+    }
+
+    .ai-demo-link > span {
+        @apply rounded-full bg-white px-3 py-1 leading-5 text-zinc-900;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .ai-demo-link::before {
+            animation: none;
+        }
+    }
+
+    @keyframes ai-demo-spin {
+        to {
+            transform: rotate(1turn);
+        }
+    }
 }

@@ -361,13 +361,7 @@ defmodule PortfolioWeb.RecruitingDemo.DemoLive do
                 "border-zinc-900 ring-1 ring-zinc-900"
             ]}
           >
-            <span class="flex items-center justify-between gap-2">
-              <span class="font-semibold">{cv.name}</span>
-              <.tag
-                text={if cv.kind == "trap", do: gettext("trap"), else: gettext("classic")}
-                variant={if cv.kind == "trap", do: "destructive", else: "secondary"}
-              />
-            </span>
+            <span class="block font-semibold">{cv.name}</span>
             <span class="mt-1 block text-sm text-muted-foreground">{template_pitch(cv.template_id)}</span>
           </button>
         </div>

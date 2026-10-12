@@ -11,11 +11,8 @@
       >
         Blog
       </a>
-      <a
-        href={"/#{Gettext.get_locale(PortfolioWeb.Gettext)}/demo/recruiting"}
-        class={"font-bold hover:text-zinc-700 #{if @page_title == gettext("Recruiting demo"), do: "underline"}" }
-      >
-        {gettext("Demo")}
+      <a href={"/#{Gettext.get_locale(PortfolioWeb.Gettext)}/demo/recruiting"} class="ai-demo-link">
+        <span>{gettext("AI agent demo")}</span>
       </a>
     </div>
   </div>
