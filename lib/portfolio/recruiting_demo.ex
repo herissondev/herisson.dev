@@ -96,6 +96,14 @@ defmodule Portfolio.RecruitingDemo do
     human_update(session_id, application_id, :send_email, %{subject: subject, body: body})
   end
 
+  @doc "The visitor's applications, newest first."
+  def applications(session_id) do
+    Application
+    |> Ash.Query.sort(inserted_at: :desc)
+    |> Ash.Query.load([:cv_submission])
+    |> Ash.read!(actor: Actor.human(session_id))
+  end
+
   @doc "Everything the visitor can see about an application."
   def snapshot(session_id, application_id) do
     human = Actor.human(session_id)

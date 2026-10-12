@@ -39,8 +39,11 @@ defmodule PortfolioWeb.Router do
   scope "/:locale/demo", PortfolioWeb.RecruitingDemo do
     pipe_through [:browser, :recruiting_demo]
 
+    get "/recruiting/:id/journal.json", JournalController, :export
+
     live_session :recruiting_demo, on_mount: [{PortfolioWeb.RecruitingDemo.Hooks, :default}] do
-      live "/recruiting", DemoLive
+      live "/recruiting", DemoLive, :new
+      live "/recruiting/:id", DemoLive, :show
     end
   end
 

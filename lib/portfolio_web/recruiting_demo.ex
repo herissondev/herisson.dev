@@ -6,5 +6,5 @@ defmodule PortfolioWeb.RecruitingDemo do
   use Boundary,
     top_level?: true,
     deps: [PortfolioWeb, Portfolio.RecruitingDemo],
-    exports: [Plug, Hooks, DemoLive]
+    exports: [Plug, Hooks, DemoLive, JournalController]
 end
