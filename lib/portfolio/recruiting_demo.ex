@@ -104,6 +104,15 @@ defmodule Portfolio.RecruitingDemo do
     |> Ash.read!(actor: Actor.human(session_id))
   end
 
+  @doc "Demo button: makes an agent try `send_email`; the policy refuses it."
+  def force_forbidden_call(session_id, application_id, agent, opts \\ []) do
+    with {:ok, application} <-
+           Ash.get(Application, application_id, actor: Actor.human(session_id)) do
+      Pipeline.force_forbidden_call(application, agent, opts)
+      {:ok, application}
+    end
+  end
+
   @doc "Everything the visitor can see about an application."
   def snapshot(session_id, application_id) do
     human = Actor.human(session_id)

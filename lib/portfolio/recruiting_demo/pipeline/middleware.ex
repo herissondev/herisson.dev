@@ -10,17 +10,17 @@ defmodule Portfolio.RecruitingDemo.Pipeline.Middleware do
   alias Portfolio.RecruitingDemo.Pipeline.AgentStep
 
   @impl true
-  def event({:run_start, %{input: input}}, %{impl: {AgentStep, opts}}, context) do
-    agent = opts[:agent]
+  def event({:run_start, %{input: input} = arguments}, %{impl: {AgentStep, opts}}, context) do
+    role = (opts[:agent] || arguments[:agent]).role()
 
-    append(context, Actor.agent(agent.role(), context.session_id), :agent_input, %{
-      agent: agent.role(),
+    append(context, Actor.agent(role, context.session_id), :agent_input, %{
+      agent: role,
       input: input
     })
   end
 
-  def event({:run_complete, result}, %{impl: {AgentStep, opts}}, context) do
-    actor = Actor.agent(opts[:agent].role(), context.session_id)
+  def event({:run_complete, result}, %{impl: {AgentStep, _opts}}, context) do
+    actor = Actor.agent(result.agent, context.session_id)
 
     append(context, actor, :agent_output, %{
       agent: result.agent,

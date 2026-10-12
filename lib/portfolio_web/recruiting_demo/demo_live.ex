@@ -153,6 +153,14 @@ defmodule PortfolioWeb.RecruitingDemo.DemoLive do
   def handle_event("close_context", _params, socket),
     do: {:noreply, assign(socket, :context_agent, nil)}
 
+  def handle_event("force_call", %{"agent" => agent}, socket)
+      when agent in ~w(triage researcher matcher writer) do
+    act(
+      socket,
+      &RecruitingDemo.force_forbidden_call(&1, &2, agent, locale: socket.assigns.locale)
+    )
+  end
+
   @impl true
   def handle_info({:recruiting_demo, :event, event}, socket) do
     case socket.assigns.snapshot do

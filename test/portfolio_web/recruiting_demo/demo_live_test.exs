@@ -106,7 +106,10 @@ defmodule PortfolioWeb.RecruitingDemo.DemoLiveTest do
     {view, path} = submit(conn)
     await(view, "#decide-yes")
 
-    view |> element(~s(button[phx-value-agent="triage"])) |> render_click()
+    view
+    |> element(~s(button[phx-click="show_context"][phx-value-agent="triage"]))
+    |> render_click()
+
     modal = view |> element("#agent-context") |> render()
     assert modal =~ "Context received by Triage"
     assert modal =~ "cv_text"
@@ -120,6 +123,22 @@ defmodule PortfolioWeb.RecruitingDemo.DemoLiveTest do
 
     conn = get(build_conn() |> Plug.Test.init_test_session(%{}), path <> "/journal.json")
     assert json_response(conn, 200)["events"] == []
+  end
+
+  test "forcing a forbidden call shows the policy refusal", %{conn: conn} do
+    {view, _path} = submit(conn)
+    await(view, "#decide-yes")
+
+    view
+    |> element(~s(button[phx-click="force_call"][phx-value-agent="writer"]))
+    |> render_click()
+
+    await(view, "#agent-writer .bg-destructive\\/10")
+
+    html = render(view)
+    assert html =~ "Refused by policy: send_email"
+    assert html =~ "Policy refuses send_email to Writer"
+    refute html =~ "Outbox (fake"
   end
 
   test "an application id from another session is not shown", %{conn: conn} do

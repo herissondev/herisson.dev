@@ -10,10 +10,11 @@ defmodule Portfolio.RecruitingDemo.Pipeline.InputStep do
 
   @impl true
   def run(arguments, context, options) do
-    agent = Keyword.fetch!(options, :agent)
+    agent = options[:agent] || Map.fetch!(arguments, :agent)
     args = Map.get(arguments, :args, arguments)
     actor = Actor.agent(agent.role(), context.session_id)
 
-    {:ok, agent.input(args.application_id, actor, Map.put(args, :locale, context[:locale]))}
+    input = agent.input(args.application_id, actor, Map.put(args, :locale, context[:locale]))
+    {:ok, Map.put(input, :application_id, args.application_id)}
   end
 end

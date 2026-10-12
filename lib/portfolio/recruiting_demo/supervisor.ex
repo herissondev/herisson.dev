@@ -16,6 +16,7 @@ defmodule Portfolio.RecruitingDemo.Supervisor do
       children = [
         RecruitingDemo.AuditLog,
         RecruitingDemo.Cleaner,
+        RecruitingDemo.Budget,
         {Task.Supervisor, name: RecruitingDemo.TaskSupervisor},
         {RecruitingDemo.RateLimit, clean_period: :timer.minutes(1)}
       ]

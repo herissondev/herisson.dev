@@ -14,8 +14,8 @@ defmodule Portfolio.RecruitingDemo.Pipeline.AgentStep do
   alias Portfolio.RecruitingDemo.Pipeline
 
   @impl true
-  def run(%{input: input}, context, options) do
-    agent = Keyword.fetch!(options, :agent)
+  def run(%{input: input} = arguments, context, options) do
+    agent = options[:agent] || Map.fetch!(arguments, :agent)
     role = agent.role()
     actor = Actor.agent(role, context.session_id)
     started = System.monotonic_time(:millisecond)
@@ -51,7 +51,7 @@ defmodule Portfolio.RecruitingDemo.Pipeline.AgentStep do
   defp call(role, input, context, max, attempt) do
     task =
       Task.Supervisor.async_nolink(RecruitingDemo.TaskSupervisor, fn ->
-        backend().call(role, input, context)
+        backend(context).call(role, input, context)
       end)
 
     result =
@@ -69,8 +69,21 @@ defmodule Portfolio.RecruitingDemo.Pipeline.AgentStep do
     end
   end
 
-  defp backend,
-    do: Keyword.get(RecruitingDemo.config(), :agent_backend, RecruitingDemo.Agents.Simulated)
+  # A run may impose its backend (forced calls); :auto picks the real models
+  # when an OpenRouter key is configured
+  defp backend(%{backend: backend}) when is_atom(backend) and not is_nil(backend), do: backend
+
+  defp backend(_context) do
+    case Keyword.get(RecruitingDemo.config(), :agent_backend, :auto) do
+      :auto ->
+        if RecruitingDemo.Agents.Live.available?(),
+          do: RecruitingDemo.Agents.Live,
+          else: RecruitingDemo.Agents.Simulated
+
+      backend ->
+        backend
+    end
+  end
 
   defp timeout, do: Keyword.get(RecruitingDemo.config(), :agent_timeout_ms, 30_000)
   defp attempts, do: Keyword.get(RecruitingDemo.config(), :agent_attempts, 2)

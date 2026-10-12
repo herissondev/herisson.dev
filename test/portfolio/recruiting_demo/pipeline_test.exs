@@ -123,7 +123,7 @@ defmodule Portfolio.RecruitingDemo.PipelineTest do
     s = snapshot(sid, id) |> Map.put(:events, RecruitingDemo.journal(sid, id))
 
     assert [triage] = input_of(s, "triage")
-    assert Map.keys(triage) |> Enum.sort() == ~w(cv_text job_title)
+    assert Map.keys(triage) |> Enum.sort() == ~w(application_id cv_text job_title)
 
     for input <- input_of(s, "researcher") do
       refute Map.has_key?(input, "offer")
@@ -133,7 +133,7 @@ defmodule Portfolio.RecruitingDemo.PipelineTest do
     assert [writer] = input_of(s, "writer")
 
     assert Map.keys(writer) |> Enum.sort() ==
-             ~w(candidate_name job_title key_points language recommendation)
+             ~w(application_id candidate_name job_title key_points language recommendation)
 
     refute Jason.encode!(writer) =~ "65000"
     refute Jason.encode!(writer) =~ "Lumen Labs since 2021"

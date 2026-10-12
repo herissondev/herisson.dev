@@ -1,7 +1,7 @@
 {
   "_note": "Fictitious company directory used by the simulated search_profile tool.",
   "Lumen Labs": {"source": "Company register (simulated)", "description": "Billing software publisher, Lyon, 40 employees, Elixir stack."},
-  "Fintra": {"source": "Company register (simulated)", "description": "Payment services company, Paris, founded 2012."},
+  "Fintra": {"source": "Company register (simulated)", "description": "Payment services company, Paris, founded 2001."},
   "Panier Malin": {"source": "Company register (simulated)", "description": "Online grocery shop, Nantes, Ruby on Rails stack."},
   "Studio Brume": {"source": "Company register (simulated)", "description": "Small web agency, Grenoble, closed in 2022."},
   "Telcom Sud": {"source": "Company register (simulated)", "description": "Telecom equipment maker, Montpellier, Erlang since 2005."}

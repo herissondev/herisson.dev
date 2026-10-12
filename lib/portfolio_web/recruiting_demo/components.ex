@@ -81,15 +81,26 @@ defmodule PortfolioWeb.RecruitingDemo.Components do
         {event.payload["error"]}
       </p>
 
-      <button
-        :if={@card.inputs != []}
-        type="button"
-        phx-click="show_context"
-        phx-value-agent={@card.agent}
-        class="self-start text-xs font-semibold underline hover:text-zinc-700"
-      >
-        {gettext("See this agent's context")} ({length(@card.inputs)})
-      </button>
+      <div class="flex flex-wrap gap-3">
+        <button
+          :if={@card.inputs != []}
+          type="button"
+          phx-click="show_context"
+          phx-value-agent={@card.agent}
+          class="text-xs font-semibold underline hover:text-zinc-700"
+        >
+          {gettext("See this agent's context")} ({length(@card.inputs)})
+        </button>
+        <button
+          type="button"
+          phx-click="force_call"
+          phx-value-agent={@card.agent}
+          title={gettext("Makes this agent call send_email on purpose: only a human may send.")}
+          class="text-xs font-semibold text-destructive underline hover:opacity-80"
+        >
+          {gettext("Force a forbidden call")}
+        </button>
+      </div>
     </div>
     """
   end

@@ -47,7 +47,7 @@ msgstr ""
 msgid "Projects"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:218
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:256
 #, elixir-autogen, elixir-format
 msgid "All data is fictitious and is not kept: everything is erased when your session ends. Web research is simulated."
 msgstr ""
@@ -57,171 +57,171 @@ msgstr ""
 msgid "Demo"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:213
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:251
 #, elixir-autogen, elixir-format
 msgid "Four AI agents with partitioned rights screen a CV. You play the recruiter: you alone decide and send the email."
 msgstr ""
 
 #: lib/portfolio_web/components/layouts/app.html.heex:16
 #: lib/portfolio_web/recruiting_demo/demo_live.ex:24
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:211
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:249
 #, elixir-autogen, elixir-format
 msgid "Recruiting demo"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:135
+#: lib/portfolio_web/recruiting_demo/view.ex:151
 #, elixir-autogen, elixir-format
 msgid "%{agent} answers (%{model}, %{ms} ms)"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:142
+#: lib/portfolio_web/recruiting_demo/view.ex:159
 #, elixir-autogen, elixir-format
 msgid "%{agent} calls a tool: %{detail}"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:131
+#: lib/portfolio_web/recruiting_demo/view.ex:147
 #, elixir-autogen, elixir-format
 msgid "%{agent} receives its context"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/components.ex:179
+#: lib/portfolio_web/recruiting_demo/components.ex:193
 #, elixir-autogen, elixir-format
 msgid "1 event"
 msgid_plural "%{count} events"
 msgstr[0] ""
 msgstr[1] ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:333
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:411
 #, elixir-autogen, elixir-format
 msgid "Age (protected criterion)"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:473
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:575
 #, elixir-autogen, elixir-format
 msgid "Aligned profile"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:125
+#: lib/portfolio_web/recruiting_demo/view.ex:141
 #, elixir-autogen, elixir-format
 msgid "Application %{state}"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:435
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:535
 #, elixir-autogen, elixir-format
 msgid "Body"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/components.ex:200
+#: lib/portfolio_web/recruiting_demo/components.ex:214
 #, elixir-autogen, elixir-format
 msgid "Chain broken at event #%{seq}."
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:437
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:538
 #, elixir-autogen, elixir-format
 msgid "Changes compared with the agent's version"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:166
+#: lib/portfolio_web/recruiting_demo/view.ex:190
 #, elixir-autogen, elixir-format
 msgid "Compensation: %{action}"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:248
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:289
 #, elixir-autogen, elixir-format
 msgid "Context received by %{agent}"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:397
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:479
 #, elixir-autogen, elixir-format
 msgid "Continue the screening"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:429
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:523
 #, elixir-autogen, elixir-format
 msgid "Draft"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:319
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:391
 #, elixir-autogen, elixir-format
 msgid "Email"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:251
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:292
 #, elixir-autogen, elixir-format
 msgid "Exactly what was sent to the model, as recorded in the journal."
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:327
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:405
 #, elixir-autogen, elixir-format
 msgid "Experiences, one per line: Company | Role | 2020-2023 | Summary"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/components.ex:191
+#: lib/portfolio_web/recruiting_demo/components.ex:205
 #, elixir-autogen, elixir-format
 msgid "Export JSON"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:334
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:412
 #, elixir-autogen, elixir-format
 msgid "Family situation (protected)"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:331
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:409
 #, elixir-autogen, elixir-format
 msgid "Full CV text"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:295
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:363
 #, elixir-autogen, elixir-format
 msgid "Full remote"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/components.ex:105
+#: lib/portfolio_web/recruiting_demo/components.ex:119
 #, elixir-autogen, elixir-format
 msgid "Gaps with the position"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/components.ex:197
+#: lib/portfolio_web/recruiting_demo/components.ex:211
 #, elixir-autogen, elixir-format
 msgid "Hash chain verified: no event was altered."
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:320
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:392
 #, elixir-autogen, elixir-format
 msgid "Headline"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:295
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:362
 #, elixir-autogen, elixir-format
 msgid "Hybrid"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:478
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:580
 #, elixir-autogen, elixir-format
 msgid "Inconsistency"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:94
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:106
 #, elixir-autogen, elixir-format
 msgid "Invalid application: %{error}"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:284
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:338
 #, elixir-autogen, elixir-format
 msgid "Job title"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/components.ex:177
+#: lib/portfolio_web/recruiting_demo/components.ex:191
 #, elixir-autogen, elixir-format
 msgid "Journal"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:288
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:347
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Location"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:387
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:468
 #, elixir-autogen, elixir-format
 msgid "Manual review"
 msgstr ""
@@ -231,58 +231,58 @@ msgstr ""
 msgid "Matcher"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:148
+#: lib/portfolio_web/recruiting_demo/view.ex:168
 #, elixir-autogen, elixir-format
 msgid "Matcher asks the Researcher: %{question}"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/components.ex:100
+#: lib/portfolio_web/recruiting_demo/components.ex:114
 #, elixir-autogen, elixir-format
 msgid "Matcher's recommendation"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:99
+#: lib/portfolio_web/recruiting_demo/view.ex:105
 #, elixir-autogen, elixir-format
 msgid "Maybe"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:377
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:458
 #, elixir-autogen, elixir-format
 msgid "Messages between agents"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:287
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:345
 #, elixir-autogen, elixir-format
 msgid "Minimum years of experience"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:318
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:390
 #, elixir-autogen, elixir-format
 msgid "Name"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:237
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:278
 #, elixir-autogen, elixir-format
 msgid "New application"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:290
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:354
 #, elixir-autogen, elixir-format
 msgid "Nice to have (comma separated)"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:416
-#: lib/portfolio_web/recruiting_demo/view.ex:100
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:508
+#: lib/portfolio_web/recruiting_demo/view.ex:106
 #, elixir-autogen, elixir-format
 msgid "No"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:475
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:577
 #, elixir-autogen, elixir-format
 msgid "Off-topic document"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:295
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:361
 #, elixir-autogen, elixir-format
 msgid "On site"
 msgstr ""
@@ -292,42 +292,42 @@ msgstr ""
 msgid "Orchestrator"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:335
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:413
 #, elixir-autogen, elixir-format
 msgid "Origin (protected)"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:445
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:547
 #, elixir-autogen, elixir-format
 msgid "Outbox (fake: nothing leaves this page)"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:474
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:576
 #, elixir-autogen, elixir-format
 msgid "Partial profile"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:145
+#: lib/portfolio_web/recruiting_demo/view.ex:165
 #, elixir-autogen, elixir-format
 msgid "Policy refuses %{tool} to %{agent}"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:476
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:578
 #, elixir-autogen, elixir-format
 msgid "Prompt injection"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:477
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:579
 #, elixir-autogen, elixir-format
 msgid "Protected criteria"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/components.ex:107
+#: lib/portfolio_web/recruiting_demo/components.ex:121
 #, elixir-autogen, elixir-format
 msgid "Quoted from the CV"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:25
+#: lib/portfolio_web/recruiting_demo/view.ex:29
 #, elixir-autogen, elixir-format
 msgid "Reads the CV (without protected criteria), research and full offer."
 msgstr ""
@@ -337,37 +337,37 @@ msgstr ""
 msgid "Reads the CV text and the job title. No tools."
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:24
+#: lib/portfolio_web/recruiting_demo/view.ex:26
 #, elixir-autogen, elixir-format
 msgid "Reads the name and declared experiences. Never the offer."
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:26
+#: lib/portfolio_web/recruiting_demo/view.ex:32
 #, elixir-autogen, elixir-format
 msgid "Reads the verdict, key points and job title. Never the CV nor the salary."
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/components.ex:68
+#: lib/portfolio_web/recruiting_demo/components.ex:71
 #, elixir-autogen, elixir-format
 msgid "Refused by policy: %{tool}"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:399
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:485
 #, elixir-autogen, elixir-format
 msgid "Reject"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:294
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:359
 #, elixir-autogen, elixir-format
 msgid "Remote work"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/components.ex:185
+#: lib/portfolio_web/recruiting_demo/components.ex:199
 #, elixir-autogen, elixir-format
 msgid "Replay"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:289
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:350
 #, elixir-autogen, elixir-format
 msgid "Required skills (comma separated)"
 msgstr ""
@@ -377,32 +377,32 @@ msgstr ""
 msgid "Researcher"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:286
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:341
 #, elixir-autogen, elixir-format
 msgid "Salary max (€/year)"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:285
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:340
 #, elixir-autogen, elixir-format
 msgid "Salary min (€/year)"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/components.ex:88
+#: lib/portfolio_web/recruiting_demo/components.ex:92
 #, elixir-autogen, elixir-format
 msgid "See this agent's context"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:407
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:499
 #, elixir-autogen, elixir-format
 msgid "Send an email to this candidate?"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:341
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:419
 #, elixir-autogen, elixir-format
 msgid "Send the application"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:440
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:542
 #, elixir-autogen, elixir-format
 msgid "Send the email"
 msgstr ""
@@ -412,62 +412,62 @@ msgstr ""
 msgid "Simulated research"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:322
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:399
 #, elixir-autogen, elixir-format
 msgid "Skills (comma separated)"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:163
+#: lib/portfolio_web/recruiting_demo/view.ex:187
 #, elixir-autogen, elixir-format
 msgid "Step %{step} failed: %{error}"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/components.ex:103
+#: lib/portfolio_web/recruiting_demo/components.ex:117
 #, elixir-autogen, elixir-format
 msgid "Strengths"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:97
+#: lib/portfolio_web/recruiting_demo/view.ex:103
 #, elixir-autogen, elixir-format
 msgid "Strong yes"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:434
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:534
 #, elixir-autogen, elixir-format
 msgid "Subject"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:424
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:516
 #, elixir-autogen, elixir-format
 msgid "The Writer is drafting the email…"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:279
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:326
 #, elixir-autogen, elixir-format
 msgid "The application"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:450
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:552
 #, elixir-autogen, elixir-format
 msgid "The pipeline failed"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:271
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:315
 #, elixir-autogen, elixir-format
 msgid "The position"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:50
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:53
 #, elixir-autogen, elixir-format
 msgid "This application does not exist in your session."
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/components.ex:156
+#: lib/portfolio_web/recruiting_demo/components.ex:170
 #, elixir-autogen, elixir-format
 msgid "To"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:91
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:98
 #, elixir-autogen, elixir-format
 msgid "Too many applications from your address, try again later."
 msgstr ""
@@ -477,37 +477,37 @@ msgstr ""
 msgid "Triage"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:389
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:470
 #, elixir-autogen, elixir-format
 msgid "Triage classified this document as \"%{category}\" with a confidence of %{confidence} (threshold %{threshold}). An ambiguous or suspicious case is never rejected automatically: you decide."
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:344
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:422
 #, elixir-autogen, elixir-format
 msgid "Uses the position and the CV as currently filled in."
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:116
+#: lib/portfolio_web/recruiting_demo/view.ex:130
 #, elixir-autogen, elixir-format
 msgid "Verification done, results recorded"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/components.ex:106
+#: lib/portfolio_web/recruiting_demo/components.ex:120
 #, elixir-autogen, elixir-format
 msgid "Verification notes"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/components.ex:188
+#: lib/portfolio_web/recruiting_demo/components.ex:202
 #, elixir-autogen, elixir-format
 msgid "Verify integrity"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/components.ex:104
+#: lib/portfolio_web/recruiting_demo/components.ex:118
 #, elixir-autogen, elixir-format
 msgid "Weaknesses"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/components.ex:71
+#: lib/portfolio_web/recruiting_demo/components.ex:74
 #, elixir-autogen, elixir-format
 msgid "Why"
 msgstr ""
@@ -517,18 +517,18 @@ msgstr ""
 msgid "Writer"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:431
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:525
 #, elixir-autogen, elixir-format
 msgid "Written by the Writer agent. Edit it freely: only you can send it."
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:321
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:396
 #, elixir-autogen, elixir-format
 msgid "Years of experience"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:409
-#: lib/portfolio_web/recruiting_demo/view.ex:98
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:501
+#: lib/portfolio_web/recruiting_demo/view.ex:104
 #, elixir-autogen, elixir-format
 msgid "Yes"
 msgstr ""
@@ -538,158 +538,168 @@ msgstr ""
 msgid "You"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:151
+#: lib/portfolio_web/recruiting_demo/view.ex:171
 #, elixir-autogen, elixir-format
 msgid "You decide: %{decision}"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:157
+#: lib/portfolio_web/recruiting_demo/view.ex:178
 #, elixir-autogen, elixir-format
 msgid "You edit the draft (v%{from} → v%{to})"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:154
+#: lib/portfolio_web/recruiting_demo/view.ex:174
 #, elixir-autogen, elixir-format
 msgid "You let the CV go on"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:154
+#: lib/portfolio_web/recruiting_demo/view.ex:174
 #, elixir-autogen, elixir-format
 msgid "You reject the CV"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:160
+#: lib/portfolio_web/recruiting_demo/view.ex:184
 #, elixir-autogen, elixir-format
 msgid "You send the email to %{to} (fake outbox)"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:225
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:263
 #, elixir-autogen, elixir-format
 msgid "Your applications"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:88
+#: lib/portfolio_web/recruiting_demo/view.ex:94
 #, elixir-autogen, elixir-format
 msgid "awaiting your decision"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:312
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:382
 #, elixir-autogen, elixir-format
 msgid "classic"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/components.ex:51
+#: lib/portfolio_web/recruiting_demo/components.ex:54
 #, elixir-autogen, elixir-format
 msgid "confidence %{value}"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:63
+#: lib/portfolio_web/recruiting_demo/view.ex:69
 #, elixir-autogen, elixir-format
 msgid "done"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:90
+#: lib/portfolio_web/recruiting_demo/view.ex:96
 #, elixir-autogen, elixir-format
 msgid "draft ready"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:89
+#: lib/portfolio_web/recruiting_demo/view.ex:95
 #, elixir-autogen, elixir-format
 msgid "drafting"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:65
-#: lib/portfolio_web/recruiting_demo/view.ex:93
+#: lib/portfolio_web/recruiting_demo/view.ex:71
+#: lib/portfolio_web/recruiting_demo/view.ex:99
 #, elixir-autogen, elixir-format
 msgid "failed"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:87
+#: lib/portfolio_web/recruiting_demo/view.ex:93
 #, elixir-autogen, elixir-format
 msgid "manual review"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:86
+#: lib/portfolio_web/recruiting_demo/view.ex:92
 #, elixir-autogen, elixir-format
 msgid "matching"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:104
+#: lib/portfolio_web/recruiting_demo/view.ex:110
 #, elixir-autogen, elixir-format
 msgid "off position"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:83
+#: lib/portfolio_web/recruiting_demo/view.ex:89
 #, elixir-autogen, elixir-format
 msgid "received"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:64
+#: lib/portfolio_web/recruiting_demo/view.ex:70
 #, elixir-autogen, elixir-format
 msgid "refused"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:92
+#: lib/portfolio_web/recruiting_demo/view.ex:98
 #, elixir-autogen, elixir-format
 msgid "rejected"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:103
+#: lib/portfolio_web/recruiting_demo/view.ex:109
 #, elixir-autogen, elixir-format
 msgid "relevant"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:364
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:445
 #, elixir-autogen, elixir-format
 msgid "replay"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:85
+#: lib/portfolio_web/recruiting_demo/view.ex:91
 #, elixir-autogen, elixir-format
 msgid "researching"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:62
+#: lib/portfolio_web/recruiting_demo/view.ex:68
 #, elixir-autogen, elixir-format
 msgid "running"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:91
+#: lib/portfolio_web/recruiting_demo/view.ex:97
 #, elixir-autogen, elixir-format
 msgid "sent"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/components.ex:156
+#: lib/portfolio_web/recruiting_demo/components.ex:170
 #, elixir-autogen, elixir-format
 msgid "sent by"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:106
+#: lib/portfolio_web/recruiting_demo/view.ex:112
 #, elixir-autogen, elixir-format
 msgid "suspect"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/components.ex:51
+#: lib/portfolio_web/recruiting_demo/components.ex:54
 #, elixir-autogen, elixir-format
 msgid "threshold %{value}"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/demo_live.ex:312
+#: lib/portfolio_web/recruiting_demo/demo_live.ex:382
 #, elixir-autogen, elixir-format
 msgid "trap"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:84
+#: lib/portfolio_web/recruiting_demo/view.ex:90
 #, elixir-autogen, elixir-format
 msgid "triaging"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:105
+#: lib/portfolio_web/recruiting_demo/view.ex:111
 #, elixir-autogen, elixir-format
 msgid "unrelated"
 msgstr ""
 
-#: lib/portfolio_web/recruiting_demo/view.ex:61
+#: lib/portfolio_web/recruiting_demo/view.ex:67
 #, elixir-autogen, elixir-format
 msgid "waiting"
+msgstr ""
+
+#: lib/portfolio_web/recruiting_demo/components.ex:101
+#, elixir-autogen, elixir-format
+msgid "Force a forbidden call"
+msgstr ""
+
+#: lib/portfolio_web/recruiting_demo/components.ex:98
+#, elixir-autogen, elixir-format
+msgid "Makes this agent call send_email on purpose: only a human may send."
 msgstr ""

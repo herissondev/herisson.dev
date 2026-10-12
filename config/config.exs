@@ -32,7 +32,17 @@ config :portfolio, Portfolio.RecruitingDemo,
   pubsub: Portfolio.PubSub,
   applications_per_hour: 10,
   # Below this Jev confidence, the visitor reviews the CV instead of an automatic decision
-  triage_threshold: 0.7
+  triage_threshold: 0.7,
+  # :auto uses Jev + OpenRouter when keys are configured, simulated agents otherwise
+  agent_backend: :auto,
+  agent_timeout_ms: 45_000,
+  agent_attempts: 2,
+  llm: [model: "openrouter:~deepseek/deepseek-flash-latest"],
+  jev: [url: "https://api.typesafe.ai/v1/systemone", model: "jev-latest"],
+  budget: [tokens_per_application: 80_000, daily_cost_usd: 2.0]
+
+# Keys come from the environment (config/runtime.exs); never load a .env implicitly
+config :req_llm, load_dotenv: false
 
 config :portfolio, ash_domains: [Portfolio.RecruitingDemo.Domain]
 

@@ -33,4 +33,6 @@ config :logger, level: :warning
 config :phoenix, :plug_init_mode, :runtime
 
 # Recruiting demo: no artificial latency in the simulated agents
-config :portfolio, Portfolio.RecruitingDemo, simulated_latency_ms: {0, 0}
+config :portfolio, Portfolio.RecruitingDemo,
+  simulated_latency_ms: {0, 0},
+  agent_backend: Portfolio.RecruitingDemo.Agents.Simulated

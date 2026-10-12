@@ -7,14 +7,58 @@ defmodule Portfolio.RecruitingDemo.Pipeline do
 
   alias Portfolio.RecruitingDemo
   alias Portfolio.RecruitingDemo.Actor
-  alias Portfolio.RecruitingDemo.Pipeline.{DraftingReactor, MatchingReactor, ScreeningReactor}
+  alias Portfolio.RecruitingDemo.Agents
+
+  alias Portfolio.RecruitingDemo.Pipeline.{
+    DraftingReactor,
+    ForcedCallReactor,
+    MatchingReactor,
+    ScreeningReactor
+  }
+
   alias Portfolio.RecruitingDemo.Resources.Application
 
-  @context_keys [:application_id, :session_id, :locale]
+  @context_keys [:application_id, :session_id, :locale, :backend]
+
+  @agents %{
+    "triage" => Agents.Triage,
+    "researcher" => Agents.Researcher,
+    "matcher" => Agents.Matcher,
+    "writer" => Agents.Writer
+  }
 
   def screen(application, opts \\ []), do: start(ScreeningReactor, application, opts)
   def resume_matching(application, opts \\ []), do: start(MatchingReactor, application, opts)
   def draft(application, opts \\ []), do: start(DraftingReactor, application, opts)
+
+  @doc """
+  Makes an agent call `send_email` on purpose, through the very same steps
+  and journal as a real run: the policy must refuse it. The application's
+  state is left untouched whatever happens.
+  """
+  def force_forbidden_call(application, agent, opts \\ []) when is_map_key(@agents, agent) do
+    context = %{
+      application_id: application.id,
+      session_id: application.session_id,
+      locale: opts[:locale] || "en",
+      backend: Agents.Forced
+    }
+
+    run = fn ->
+      Reactor.run(
+        ForcedCallReactor,
+        %{application_id: application.id, agent: @agents[agent]},
+        context
+      )
+    end
+
+    if Keyword.get(opts, :async?, true) do
+      {:ok, _pid} = Task.Supervisor.start_child(RecruitingDemo.TaskSupervisor, run)
+      :ok
+    else
+      run.()
+    end
+  end
 
   defp start(reactor, application, opts) do
     context = %{
