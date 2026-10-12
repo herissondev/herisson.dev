@@ -30,6 +30,17 @@ spec:
                       -   name: PHX_HOST
                           # env is herisson.dev
                           value: herisson.dev
+                      # Recruiting demo: model API keys
+                      -   name: OPENROUTER_API_KEY
+                          valueFrom:
+                              secretKeyRef:
+                                  name: herissondev-secret
+                                  key: OPENROUTER_API_KEY
+                      -   name: TYPESAFE_API_KEY
+                          valueFrom:
+                              secretKeyRef:
+                                  name: herissondev-secret
+                                  key: TYPESAFE_API_KEY
 
                   imagePullPolicy: Always
                   resources:

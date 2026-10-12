@@ -31,3 +31,8 @@ config :logger, level: :warning
 
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime
+
+# Recruiting demo: no artificial latency in the simulated agents
+config :portfolio, Portfolio.RecruitingDemo,
+  simulated_latency_ms: {0, 0},
+  agent_backend: Portfolio.RecruitingDemo.Agents.Simulated

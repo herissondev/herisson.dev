@@ -1,0 +1,22 @@
+{
+  "fr": {
+    "title": "Business Developer B2B (SaaS)",
+    "salary_min": 45000,
+    "salary_max": 60000,
+    "min_years": 3,
+    "required_skills": ["Prospection B2B", "Négociation", "CRM", "Cycle de vente long"],
+    "nice_to_have_skills": ["SaaS", "Sales Navigator", "Anglais courant"],
+    "location": "Paris",
+    "remote": "hybrid"
+  },
+  "en": {
+    "title": "B2B Business Developer (SaaS)",
+    "salary_min": 45000,
+    "salary_max": 60000,
+    "min_years": 3,
+    "required_skills": ["B2B prospecting", "Negotiation", "CRM", "Long sales cycles"],
+    "nice_to_have_skills": ["SaaS", "Sales Navigator", "Fluent French"],
+    "location": "Paris",
+    "remote": "hybrid"
+  }
+}

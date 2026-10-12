@@ -1,0 +1,8 @@
+{
+  "_note": "Fictitious company register used by the simulated search_profile tool.",
+  "Lumen Software": {"source": "Company register (simulated)", "description": "HR software publisher (SaaS), Lyon, 60 employees, founded 2015."},
+  "Fintra": {"source": "Company register (simulated)", "description": "Payment services company, Paris, founded 2001."},
+  "Maison Brume": {"source": "Company register (simulated)", "description": "Furniture retail chain, 12 shops, founded 1998."},
+  "Panier Malin": {"source": "Company register (simulated)", "description": "Online grocery shop, Nantes, founded 2016."},
+  "Telcom Sud": {"source": "Company register (simulated)", "description": "B2B telecom operator, Montpellier, founded 1995."}
+}

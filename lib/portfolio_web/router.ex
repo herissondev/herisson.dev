@@ -1,4 +1,6 @@
 defmodule PortfolioWeb.Router do
+  # Only module that sees both the CV and the recruiting demo
+  use Boundary, top_level?: true, deps: [PortfolioWeb, PortfolioWeb.RecruitingDemo]
   use PortfolioWeb, :router
 
   pipeline :browser do
@@ -9,6 +11,10 @@ defmodule PortfolioWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug SetLocale, gettext: PortfolioWeb.Gettext, default_locale: "en"
+  end
+
+  pipeline :recruiting_demo do
+    plug PortfolioWeb.RecruitingDemo.Plug
   end
 
   pipeline :api do
@@ -28,6 +34,17 @@ defmodule PortfolioWeb.Router do
     get "/", PageController, :home
     get "/blog", BlogController, :index
     get "/blog/:id", BlogController, :show
+  end
+
+  scope "/:locale/demo", PortfolioWeb.RecruitingDemo do
+    pipe_through [:browser, :recruiting_demo]
+
+    get "/recruiting/:id/journal.json", JournalController, :export
+
+    live_session :recruiting_demo, on_mount: [{PortfolioWeb.RecruitingDemo.Hooks, :default}] do
+      live "/recruiting", DemoLive, :new
+      live "/recruiting/:id", DemoLive, :show
+    end
   end
 
   # Other scopes may use custom stacks.

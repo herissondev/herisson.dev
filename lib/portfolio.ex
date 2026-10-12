@@ -1,4 +1,6 @@
 defmodule Portfolio do
+  use Boundary, deps: [], exports: [Blog, Blog.Post]
+
   @moduledoc """
   Portfolio keeps the contexts that define your domain
   and business logic.

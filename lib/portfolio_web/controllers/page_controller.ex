@@ -103,11 +103,11 @@ defmodule PortfolioWeb.PageController do
       ],
       projects: [
         %{
-          title: "AI Recipe",
+          title: "AI agents demo: hiring under control",
           description:
-            "Making recipes using AI to showcase the power of Intructor (Structured LLM output)",
-          tags: ["Elixir", "Instructor", "JSON", "OPENAI"],
-          link: "https://recipe.herisson.dev/"
+            "Four AI agents screen a job application, each limited to what its role allows. The human decides and sends; every step is traceable.",
+          tags: ["Elixir", "Ash", "AI agents", "LLM", "LiveView"],
+          link: "/en/demo/recruiting"
         },
         %{
           title: "CloudFlow",
@@ -247,11 +247,11 @@ defmodule PortfolioWeb.PageController do
       ],
       projects: [
         %{
-          title: "Recette AI",
+          title: "Démo agents IA : recruter sous contrôle",
           description:
-            "Créer des recettes en utilisant l'IA pour démontrer la puissance d'Intructor (sortie LLM structurée)",
-          tags: ["Elixir", "Instructor", "JSON", "OPENAI"],
-          link: "https://recipe.herisson.dev/"
+            "Quatre agents IA analysent une candidature, chacun limité à ce que son rôle autorise. L'humain décide et envoie ; chaque étape est traçable.",
+          tags: ["Elixir", "Ash", "Agents IA", "LLM", "LiveView"],
+          link: "/fr/demo/recruiting"
         },
         %{
           title: "CloudFlow",

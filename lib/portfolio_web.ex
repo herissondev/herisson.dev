@@ -1,4 +1,20 @@
 defmodule PortfolioWeb do
+  # The CV web layer. It never references the recruiting demo: only the
+  # router (and endpoint) are top-level boundaries that see both sides.
+  use Boundary,
+    deps: [Portfolio],
+    exports: [
+      Telemetry,
+      Gettext,
+      Layouts,
+      CoreComponents,
+      MainComponents,
+      ErrorHTML,
+      ErrorJSON,
+      PageController,
+      BlogController
+    ]
+
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, components, channels, and so on.

@@ -3,6 +3,7 @@ defmodule Portfolio.Application do
   # for more information on OTP Applications
   @moduledoc false
 
+  use Boundary, top_level?: true, deps: [PortfolioWeb, PortfolioWeb.Endpoint, Portfolio.RecruitingDemo]
   use Application
 
   @impl true
@@ -14,6 +15,8 @@ defmodule Portfolio.Application do
       {Phoenix.PubSub, name: Portfolio.PubSub},
       # Start the Finch HTTP client for sending emails
       {Finch, name: Portfolio.Finch},
+      # Temporary: if the demo gives up, it stays down without taking the CV site with it
+      Supervisor.child_spec(Portfolio.RecruitingDemo.Supervisor, restart: :temporary),
       # Start a worker by calling: Portfolio.Worker.start_link(arg)
       # {Portfolio.Worker, arg},
       # Start to serve requests, typically the last entry

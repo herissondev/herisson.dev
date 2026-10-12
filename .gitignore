@@ -45,3 +45,6 @@ npm-debug.log
 # posts images
 /priv/static/assets/
 /priv/static/images/posts/*/*.open-graph.png
+
+# Local secrets (API keys), never committed
+.env

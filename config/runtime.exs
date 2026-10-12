@@ -20,6 +20,24 @@ if System.get_env("PHX_SERVER") do
   config :portfolio, PortfolioWeb.Endpoint, server: true
 end
 
+# Local API keys for the recruiting demo (git-ignored), dev only
+if config_env() == :dev and File.exists?(".env") do
+  for line <- File.read!(".env") |> String.split("\n", trim: true),
+      not String.starts_with?(line, "#"),
+      [key, value] <- [String.split(line, "=", parts: 2)],
+      do: System.put_env(String.trim(key), String.trim(value))
+end
+
+if key = System.get_env("OPENROUTER_API_KEY"), do: config(:req_llm, openrouter_api_key: key)
+
+if key = System.get_env("TYPESAFE_API_KEY"),
+  do: config(:portfolio, Portfolio.RecruitingDemo, jev: [api_key: key])
+
+# Switches the recruiting demo off without a code change: RECRUITING_DEMO_ENABLED=false
+if enabled = System.get_env("RECRUITING_DEMO_ENABLED") do
+  config :portfolio, Portfolio.RecruitingDemo, enabled: enabled in ~w(true 1)
+end
+
 if config_env() == :prod do
   # database_url =
   #   System.get_env("DATABASE_URL") ||

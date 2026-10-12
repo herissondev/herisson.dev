@@ -22,15 +22,15 @@ defmodule Portfolio.Blog do
 
   def get_post_by_id!(id) do
     Enum.find(all_posts(), &(&1.id == id)) ||
-      raise NotFoundError, "post with id=#{id} not found"
+      raise __MODULE__.NotFoundError, "post with id=#{id} not found"
   end
 
   def get_posts_by_tag!(tag) do
     case Enum.filter(all_posts(), &(tag in &1.tags)) do
-      [] -> raise NotFoundError, "posts with tag=#{tag} not found"
+      [] -> raise __MODULE__.NotFoundError, "posts with tag=#{tag} not found"
       posts -> posts
     end
   end
 end
 
-defmodule NotFoundError, do: defexception([:message, plug_status: 404])
+defmodule Portfolio.Blog.NotFoundError, do: defexception([:message, plug_status: 404])
