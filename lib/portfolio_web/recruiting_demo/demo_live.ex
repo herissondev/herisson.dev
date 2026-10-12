@@ -1,11 +1,12 @@
 defmodule PortfolioWeb.RecruitingDemo.DemoLive do
   @moduledoc """
-  The visitor plays the recruiter: configures the position, picks and edits
-  a CV, watches the agents, then alone decides and sends the email.
+  The visitor plays the recruiter: picks a candidate (and may edit the
+  position or the CV), watches the agents step by step, then alone decides
+  and sends the email. Mobile first: one column, details folded.
   """
   use PortfolioWeb, :live_view
 
-  import PortfolioWeb.MainComponents, only: [section: 1, tag: 1]
+  import PortfolioWeb.MainComponents, only: [tag: 1]
   import PortfolioWeb.RecruitingDemo.Components
 
   alias Portfolio.RecruitingDemo
@@ -17,16 +18,16 @@ defmodule PortfolioWeb.RecruitingDemo.DemoLive do
   def mount(_params, _session, socket) do
     if connected?(socket), do: RecruitingDemo.subscribe(socket.assigns.session_id)
 
-    templates = RecruitingDemo.cv_templates()
+    locale = socket.assigns.locale
+    templates = RecruitingDemo.cv_templates(locale)
 
     {:ok,
      socket
      |> assign(:page_title, gettext("Recruiting demo"))
      |> assign(:templates, templates)
-     |> assign(:tab, :offer)
      |> assign(
        :offer_form,
-       to_form(Forms.offer_params(RecruitingDemo.default_offer()), as: :offer)
+       to_form(Forms.offer_params(RecruitingDemo.default_offer(locale)), as: :offer)
      )
      |> assign(:cv_form, to_form(Forms.cv_params(hd(templates)), as: :cv))
      |> assign(:threshold, RecruitingDemo.triage_threshold())
@@ -58,9 +59,6 @@ defmodule PortfolioWeb.RecruitingDemo.DemoLive do
   def handle_params(_params, _uri, socket), do: {:noreply, assign(socket, :snapshot, nil)}
 
   @impl true
-  def handle_event("tab", %{"tab" => tab}, socket) when tab in ~w(offer cv),
-    do: {:noreply, assign(socket, :tab, String.to_existing_atom(tab))}
-
   def handle_event("offer_change", %{"offer" => params}, socket),
     do: {:noreply, assign(socket, :offer_form, to_form(params, as: :offer))}
 
@@ -70,7 +68,7 @@ defmodule PortfolioWeb.RecruitingDemo.DemoLive do
   def handle_event("pick_cv", %{"template" => template_id}, socket) do
     case Enum.find(socket.assigns.templates, &(&1.template_id == template_id)) do
       nil -> {:noreply, socket}
-      cv -> {:noreply, assign(socket, cv_form: to_form(Forms.cv_params(cv), as: :cv), tab: :cv)}
+      cv -> {:noreply, assign(socket, :cv_form, to_form(Forms.cv_params(cv), as: :cv))}
     end
   end
 
@@ -152,14 +150,6 @@ defmodule PortfolioWeb.RecruitingDemo.DemoLive do
 
   def handle_event("close_context", _params, socket),
     do: {:noreply, assign(socket, :context_agent, nil)}
-
-  def handle_event("force_call", %{"agent" => agent}, socket)
-      when agent in ~w(triage researcher matcher writer) do
-    act(
-      socket,
-      &RecruitingDemo.force_forbidden_call(&1, &2, agent, locale: socket.assigns.locale)
-    )
-  end
 
   @impl true
   def handle_info({:recruiting_demo, :event, event}, socket) do
@@ -243,340 +233,398 @@ defmodule PortfolioWeb.RecruitingDemo.DemoLive do
     assigns = assign(assigns, :events, if(assigns.snapshot, do: shown_events(assigns), else: []))
 
     ~H"""
-    <main class="container mx-auto scroll-my-12 overflow-auto p-4 md:p-10">
-      <section class="mx-auto w-full max-w-6xl space-y-6 bg-white">
-        <div class="flex-1 space-y-1.5">
-          <h1 class="text-2xl font-bold">{gettext("Recruiting demo")}</h1>
-          <p class="max-w-2xl text-pretty font-mono text-sm text-muted-foreground">
+    <main class="container mx-auto px-4 py-6 md:py-10">
+      <div class="mx-auto w-full max-w-2xl space-y-6 bg-white">
+        <header class="space-y-2">
+          <h1 class="text-2xl font-bold leading-tight">
+            {gettext("Hiring with AI agents, under control")}
+          </h1>
+          <p class="text-pretty text-sm text-muted-foreground">
             {gettext(
-              "Four AI agents with partitioned rights screen a CV. You play the recruiter: you alone decide and send the email."
+              "You are hiring a salesperson. Four AI agents sort, check and analyse the application. Each one can only do what its role allows, and you alone decide to send the email."
             )}
           </p>
-          <p class="max-w-2xl rounded border p-2 font-mono text-xs text-muted-foreground">
-            {gettext(
-              "All data is fictitious and is not kept: everything is erased when your session ends. Web research is simulated."
-            )}
-          </p>
-        </div>
-
-        <nav :if={@applications != []} class="flex flex-wrap items-center gap-2 text-xs">
-          <span class="font-semibold">{gettext("Your applications")}:</span>
-          <.link
-            :for={application <- @applications}
-            patch={application_path(@locale, application.id)}
-            class={[
-              "rounded-md border px-2 py-1 font-mono hover:bg-secondary",
-              @snapshot && @snapshot.application.id == application.id && "bg-secondary"
-            ]}
-          >
-            {application.cv_submission.name} · {View.state_label(to_string(application.state))}
-          </.link>
-          <.link
-            patch={base_path(@locale)}
-            class="rounded-md border px-2 py-1 font-semibold hover:bg-secondary"
-          >
-            + {gettext("New application")}
-          </.link>
-        </nav>
+          <div class="flex flex-wrap gap-1.5">
+            <.tag text={gettext("Fictitious data")} variant="secondary" />
+            <.tag text={gettext("Nothing is kept")} variant="secondary" />
+            <.tag text={gettext("Simulated web research")} variant="secondary" />
+          </div>
+        </header>
 
         <.new_application :if={@live_action == :new} {assigns} />
         <.pipeline :if={@live_action == :show && @snapshot} {assigns} />
-      </section>
+      </div>
     </main>
 
     <.modal :if={@context_agent} id="agent-context" show on_cancel={close_context()}>
       <h2 class="text-lg font-bold">
         {gettext("Context received by %{agent}", agent: View.agent_name(@context_agent))}
       </h2>
-      <p class="font-mono text-xs text-muted-foreground">
+      <p class="text-xs text-muted-foreground">
         {gettext("Exactly what was sent to the model, as recorded in the journal.")}
       </p>
       <pre
         :for={event <- View.agent_card(@events, @context_agent).inputs}
-        class="mt-3 max-h-96 overflow-auto whitespace-pre-wrap rounded border p-2 font-mono text-[11px]"
+        class="mt-3 max-h-96 overflow-auto whitespace-pre-wrap break-words rounded border p-2 font-mono text-[11px]"
       >{View.pretty(event.payload["input"])}</pre>
     </.modal>
     """
   end
 
   defp new_application(assigns) do
+    assigns = assign(assigns, :offer, assigns.offer_form.params)
+
     ~H"""
-    <div class="space-y-4">
-      <div class="flex gap-4 border-b text-sm font-semibold">
-        <button
-          type="button"
-          phx-click="tab"
-          phx-value-tab="offer"
-          class={[
-            "-mb-px border-b-2 pb-2",
-            (@tab == :offer && "border-zinc-900") || "border-transparent text-muted-foreground"
-          ]}
-        >
-          1. {gettext("The position")}
-        </button>
-        <button
-          type="button"
-          phx-click="tab"
-          phx-value-tab="cv"
-          class={[
-            "-mb-px border-b-2 pb-2",
-            (@tab == :cv && "border-zinc-900") || "border-transparent text-muted-foreground"
-          ]}
-        >
-          2. {gettext("The application")}
-        </button>
-      </div>
+    <div class="space-y-6">
+      <ol class="flex flex-wrap gap-x-4 gap-y-1 text-sm">
+        <li><span class="font-bold">1.</span> {gettext("Pick a candidate")}</li>
+        <li><span class="font-bold">2.</span> {gettext("Watch the AI agents work")}</li>
+        <li><span class="font-bold">3.</span> {gettext("You decide, you send")}</li>
+      </ol>
 
-      <.form
-        :if={@tab == :offer}
-        for={@offer_form}
-        id="offer-form"
-        phx-change="offer_change"
-        class="grid gap-4 sm:grid-cols-2"
-      >
-        <div class="sm:col-span-2">
-          <.input field={@offer_form[:title]} label={gettext("Job title")} />
-        </div>
-        <.input field={@offer_form[:salary_min]} type="number" label={gettext("Salary min (€/year)")} />
-        <.input field={@offer_form[:salary_max]} type="number" label={gettext("Salary max (€/year)")} />
-        <.input
-          field={@offer_form[:min_years]}
-          type="number"
-          label={gettext("Minimum years of experience")}
-        />
-        <.input field={@offer_form[:location]} label={gettext("Location")} />
-        <.input
-          field={@offer_form[:required_skills]}
-          label={gettext("Required skills (comma separated)")}
-        />
-        <.input
-          field={@offer_form[:nice_to_have_skills]}
-          label={gettext("Nice to have (comma separated)")}
-        />
-        <.input
-          field={@offer_form[:remote]}
-          type="select"
-          label={gettext("Remote work")}
-          options={[
-            {gettext("On site"), "none"},
-            {gettext("Hybrid"), "hybrid"},
-            {gettext("Full remote"), "full"}
-          ]}
-        />
-      </.form>
+      <section class="space-y-2">
+        <h2 class="text-sm font-bold">{gettext("The position")}</h2>
+        <details class="rounded border p-3">
+          <summary class="cursor-pointer list-none">
+            <p class="font-semibold">{@offer["title"]}</p>
+            <p class="text-sm text-muted-foreground">
+              {@offer["location"]} · {gettext("%{min}–%{max} k€/year",
+                min: thousands(@offer["salary_min"]),
+                max: thousands(@offer["salary_max"])
+              )} · {gettext("%{years} years min.", years: @offer["min_years"])}
+            </p>
+            <p class="mt-1 text-xs font-semibold underline">{gettext("Edit the position")}</p>
+          </summary>
+          <.form
+            for={@offer_form}
+            id="offer-form"
+            phx-change="offer_change"
+            class="mt-3 grid gap-3 sm:grid-cols-2"
+          >
+            <div class="sm:col-span-2">
+              <.input field={@offer_form[:title]} label={gettext("Job title")} />
+            </div>
+            <.input
+              field={@offer_form[:salary_min]}
+              type="number"
+              label={gettext("Salary min (€/year)")}
+            />
+            <.input
+              field={@offer_form[:salary_max]}
+              type="number"
+              label={gettext("Salary max (€/year)")}
+            />
+            <.input
+              field={@offer_form[:min_years]}
+              type="number"
+              label={gettext("Minimum years of experience")}
+            />
+            <.input field={@offer_form[:location]} label={gettext("Location")} />
+            <div class="sm:col-span-2">
+              <.input
+                field={@offer_form[:required_skills]}
+                label={gettext("Required skills (comma separated)")}
+              />
+            </div>
+            <div class="sm:col-span-2">
+              <.input
+                field={@offer_form[:nice_to_have_skills]}
+                label={gettext("Nice to have (comma separated)")}
+              />
+            </div>
+            <.input
+              field={@offer_form[:remote]}
+              type="select"
+              label={gettext("Remote work")}
+              options={[
+                {gettext("On site"), "none"},
+                {gettext("Hybrid"), "hybrid"},
+                {gettext("Full remote"), "full"}
+              ]}
+            />
+          </.form>
+        </details>
+      </section>
 
-      <div :if={@tab == :cv} class="space-y-4">
-        <div class="flex flex-wrap gap-2">
+      <section class="space-y-2">
+        <h2 class="text-sm font-bold">{gettext("Pick a candidate")}</h2>
+        <div class="grid gap-2 sm:grid-cols-2">
           <button
             :for={cv <- @templates}
             type="button"
+            id={"pick-#{cv.template_id}"}
             phx-click="pick_cv"
             phx-value-template={cv.template_id}
             class={[
-              "rounded-md border px-2 py-1 text-left text-xs hover:bg-secondary",
-              @cv_form.params["template_id"] == cv.template_id && "bg-secondary"
+              "rounded border p-3 text-left transition-colors hover:bg-secondary",
+              @cv_form.params["template_id"] == cv.template_id &&
+                "border-zinc-900 ring-1 ring-zinc-900"
             ]}
           >
-            <span class="font-semibold">{template_label(cv.template_id)}</span>
-            <.tag
-              text={if cv.kind == "trap", do: gettext("trap"), else: gettext("classic")}
-              variant={if cv.kind == "trap", do: "destructive", else: "secondary"}
-            />
+            <span class="flex items-center justify-between gap-2">
+              <span class="font-semibold">{cv.name}</span>
+              <.tag
+                text={if cv.kind == "trap", do: gettext("trap"), else: gettext("classic")}
+                variant={if cv.kind == "trap", do: "destructive", else: "secondary"}
+              />
+            </span>
+            <span class="mt-1 block text-sm text-muted-foreground">{template_pitch(cv.template_id)}</span>
           </button>
         </div>
 
-        <.form for={@cv_form} id="cv-form" phx-change="cv_change" class="grid gap-4 sm:grid-cols-2">
-          <input type="hidden" name="cv[template_id]" value={@cv_form.params["template_id"]} />
-          <.input field={@cv_form[:name]} label={gettext("Name")} />
-          <.input field={@cv_form[:email]} label={gettext("Email")} />
-          <.input field={@cv_form[:headline]} label={gettext("Headline")} />
-          <.input
-            field={@cv_form[:years_experience]}
-            type="number"
-            label={gettext("Years of experience")}
-          />
-          <div class="sm:col-span-2">
-            <.input field={@cv_form[:skills]} label={gettext("Skills (comma separated)")} />
-          </div>
-          <div class="sm:col-span-2">
+        <details class="rounded border p-3">
+          <summary class="cursor-pointer list-none text-xs font-semibold underline">
+            {gettext("Edit this CV (%{name})", name: @cv_form.params["name"])}
+          </summary>
+          <.form
+            for={@cv_form}
+            id="cv-form"
+            phx-change="cv_change"
+            class="mt-3 grid gap-3 sm:grid-cols-2"
+          >
+            <input type="hidden" name="cv[template_id]" value={@cv_form.params["template_id"]} />
+            <.input field={@cv_form[:name]} label={gettext("Name")} />
+            <.input field={@cv_form[:email]} label={gettext("Email")} />
+            <div class="sm:col-span-2">
+              <.input field={@cv_form[:headline]} label={gettext("Headline")} />
+            </div>
             <.input
-              field={@cv_form[:experiences]}
-              type="textarea"
-              label={gettext("Experiences, one per line: Company | Role | 2020-2023 | Summary")}
+              field={@cv_form[:years_experience]}
+              type="number"
+              label={gettext("Years of experience")}
             />
-          </div>
-          <div class="sm:col-span-2">
-            <.input field={@cv_form[:raw_text]} type="textarea" label={gettext("Full CV text")} />
-          </div>
-          <.input field={@cv_form[:age]} type="number" label={gettext("Age (protected criterion)")} />
-          <.input field={@cv_form[:family_status]} label={gettext("Family situation (protected)")} />
-          <.input field={@cv_form[:origin]} label={gettext("Origin (protected)")} />
-        </.form>
-      </div>
+            <.input field={@cv_form[:skills]} label={gettext("Skills (comma separated)")} />
+            <div class="sm:col-span-2">
+              <.input
+                field={@cv_form[:experiences]}
+                type="textarea"
+                label={gettext("Experiences, one per line: Company | Role | 2020-2023 | Summary")}
+              />
+            </div>
+            <div class="sm:col-span-2">
+              <.input field={@cv_form[:raw_text]} type="textarea" label={gettext("Full CV text")} />
+            </div>
+            <.input field={@cv_form[:age]} type="number" label={gettext("Age (protected criterion)")} />
+            <.input field={@cv_form[:family_status]} label={gettext("Family situation (protected)")} />
+            <.input field={@cv_form[:origin]} label={gettext("Origin (protected)")} />
+          </.form>
+        </details>
+      </section>
 
-      <div class="flex flex-wrap items-center gap-3">
-        <.button type="button" phx-click="submit" id="submit-application">
-          {gettext("Send the application")}
-        </.button>
-        <p class="font-mono text-xs text-muted-foreground">
-          {gettext("Uses the position and the CV as currently filled in.")}
-        </p>
-      </div>
+      <.button type="button" phx-click="submit" id="submit-application" class="w-full py-3 text-base">
+        {gettext("Start the analysis")}
+      </.button>
+
+      <nav :if={@applications != []} class="space-y-1 text-sm">
+        <p class="font-semibold">{gettext("Your previous applications")}</p>
+        <.link
+          :for={application <- @applications}
+          patch={application_path(@locale, application.id)}
+          class="block underline"
+        >
+          {application.cv_submission.name} · {View.state_label(to_string(application.state))}
+        </.link>
+      </nav>
     </div>
     """
   end
 
   defp pipeline(assigns) do
+    application = assigns.snapshot.application
+    steps = View.steps(assigns.events)
+
     assigns =
       assigns
-      |> assign(:application, assigns.snapshot.application)
-      |> assign(
-        :state,
-        View.state(assigns.events) || to_string(assigns.snapshot.application.state)
-      )
+      |> assign(:application, application)
+      |> assign(:steps, steps)
+      |> assign(:state, View.state(assigns.events) || to_string(application.state))
       |> assign(:messages, View.messages(assigns.events))
+      |> assign(:refusals, View.refusals(assigns.events))
 
     ~H"""
-    <div class="grid gap-6 lg:grid-cols-3">
-      <div class="space-y-6 lg:col-span-2">
-        <div class="flex flex-wrap items-center gap-2">
+    <div class="space-y-6">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <div class="min-w-0">
+          <p class="text-xs text-muted-foreground">{@snapshot.offer.title}</p>
           <h2 class="text-lg font-bold">{@snapshot.cv.name}</h2>
-          <.tag text={View.state_label(@state)} />
-          <.tag :if={@replay} text={gettext("replay")} variant="outline" />
         </div>
-
-        <div class="grid gap-3 sm:grid-cols-2">
-          <.agent_card
-            :for={agent <- View.agents()}
-            card={View.agent_card(@events, agent)}
-            application={@application}
-            threshold={@threshold}
-          />
-        </div>
-
-        <.section :if={@messages != []}>
-          <h3 class="text-sm font-bold">{gettext("Messages between agents")}</h3>
-          <ul class="space-y-1 font-mono text-xs">
-            <li :for={message <- @messages}>
-              <span class="font-semibold">{View.agent_name(message.from)} → {View.agent_name(message.to)}</span>: {message.text}
-            </li>
-          </ul>
-        </.section>
-
-        <div :if={!@replay} class="space-y-6">
-          <.section :if={@application.state == :manual_review} class="rounded border p-4">
-            <h3 class="text-sm font-bold">{gettext("Manual review")}</h3>
-            <p class="text-sm">
-              {gettext(
-                "Triage classified this document as \"%{category}\" with a confidence of %{confidence} (threshold %{threshold}). An ambiguous or suspicious case is never rejected automatically: you decide.",
-                category: View.category_label(@application.triage_category),
-                confidence:
-                  :erlang.float_to_binary((@application.triage_confidence || 0) * 1.0, decimals: 2),
-                threshold: :erlang.float_to_binary(@threshold * 1.0, decimals: 2)
-              )}
-            </p>
-            <div class="flex gap-2">
-              <.button phx-click="review" phx-value-approve="true">{gettext("Continue the screening")}</.button>
-              <.button
-                phx-click="review"
-                phx-value-approve="false"
-                class="bg-white !text-zinc-900 border hover:!bg-secondary"
-              >
-                {gettext("Reject")}
-              </.button>
-            </div>
-          </.section>
-
-          <.section
-            :if={
-              @snapshot.assessment &&
-                @application.state in [:awaiting_decision, :drafting, :draft_ready, :sent, :rejected]
-            }
-            class="rounded border p-4"
-          >
-            <.report assessment={@snapshot.assessment} />
-            <div :if={@application.state == :awaiting_decision} class="space-y-2 border-t pt-3">
-              <p class="text-sm font-semibold">{gettext("Send an email to this candidate?")}</p>
-              <div class="flex gap-2">
-                <.button phx-click="decide" phx-value-decision="yes" id="decide-yes">{gettext("Yes")}</.button>
-                <.button
-                  phx-click="decide"
-                  phx-value-decision="no"
-                  id="decide-no"
-                  class="bg-white !text-zinc-900 border hover:!bg-secondary"
-                >
-                  {gettext("No")}
-                </.button>
-              </div>
-            </div>
-          </.section>
-
-          <.section :if={@application.state == :drafting} class="rounded border p-4">
-            <p class="text-sm">
-              <.icon name="hero-arrow-path" class="h-3 w-3 animate-spin" /> {gettext(
-                "The Writer is drafting the email…"
-              )}
-            </p>
-          </.section>
-
-          <.section :if={@application.state == :draft_ready && @draft_form} class="rounded border p-4">
-            <h3 class="text-sm font-bold">{gettext("Draft")}</h3>
-            <p class="font-mono text-xs text-muted-foreground">
-              {gettext("Written by the Writer agent. Edit it freely: only you can send it.")}
-            </p>
-            <.form
-              for={@draft_form}
-              id="draft-form"
-              phx-change="draft_change"
-              phx-submit="send_email"
-              class="space-y-3"
-            >
-              <.input field={@draft_form[:subject]} label={gettext("Subject")} />
-              <.input field={@draft_form[:body]} type="textarea" label={gettext("Body")} rows="12" />
-              <div>
-                <p class="text-xs font-semibold">
-                  {gettext("Changes compared with the agent's version")}
-                </p>
-                <.diff lines={View.diff(agent_draft(@snapshot.drafts), @draft_form.params)} />
-              </div>
-              <.button type="submit" id="send-email">{gettext("Send the email")}</.button>
-            </.form>
-          </.section>
-
-          <.section :if={@snapshot.outbox != []} class="rounded border p-4">
-            <h3 class="text-sm font-bold">{gettext("Outbox (fake: nothing leaves this page)")}</h3>
-            <.outbox emails={@snapshot.outbox} />
-          </.section>
-
-          <.section :if={@application.state == :failed} class="rounded border border-destructive p-4">
-            <h3 class="text-sm font-bold">{gettext("The pipeline failed")}</h3>
-            <p class="font-mono text-xs">{@application.failure_reason}</p>
-          </.section>
-        </div>
+        <.link patch={base_path(@locale)} class="text-sm font-semibold underline">
+          ← {gettext("Another candidate")}
+        </.link>
       </div>
 
-      <aside class="lg:col-span-1">
-        <.journal
-          events={@events}
-          integrity={@integrity}
-          replaying={@replay != nil}
-          export_path={application_path(@locale, @application.id) <> "/journal.json"}
-        />
-      </aside>
+      <p :if={@replay} class="rounded bg-secondary px-3 py-2 text-sm">
+        <.icon name="hero-play-mini" class="h-4 w-4" /> {gettext("Replaying from the journal…")}
+      </p>
+
+      <ol class="list-none">
+        <.step
+          :for={{step, index} <- Enum.with_index(@steps, 1)}
+          step={step}
+          index={index}
+          last={index == length(@steps)}
+        >
+          <.step_body step={step} {assigns} />
+        </.step>
+      </ol>
+
+      <.journal
+        events={@events}
+        integrity={@integrity}
+        replaying={@replay != nil}
+        export_path={application_path(@locale, @application.id) <> "/journal.json"}
+      />
     </div>
     """
   end
 
-  defp agent_draft(drafts) do
-    draft = Enum.find(drafts, &(&1.author_kind == :agent)) || hd(drafts)
-    %{"subject" => draft.subject, "body" => draft.body}
+  # What appears under a step: actions when it waits for you, details otherwise
+  defp step_body(%{step: %{key: :triage}} = assigns) do
+    ~H"""
+    <div :if={!@replay && @application.state == :manual_review} class="space-y-2 rounded border p-3">
+      <p :if={@application.triage_category == :suspect} class="text-sm">
+        {gettext(
+          "The sorting AI found suspicious content: instructions addressed to an AI are hidden in this CV. As a precaution, you decide whether the analysis goes on."
+        )}
+      </p>
+      <p :if={@application.triage_category != :suspect} class="text-sm">
+        {gettext(
+          "The sorting AI is not sure about this document (%{category}, confidence %{confidence}%, threshold %{threshold}%). It never rejects an unclear case on its own.",
+          category: View.category_label(@application.triage_category),
+          confidence: round((@application.triage_confidence || 0) * 100),
+          threshold: round(@threshold * 100)
+        )}
+      </p>
+      <div class="flex flex-col gap-2 sm:flex-row">
+        <.button phx-click="review" phx-value-approve="true" class="w-full sm:w-auto">
+          {gettext("Continue anyway")}
+        </.button>
+        <button phx-click="review" phx-value-approve="false" class={secondary_button()}>
+          {gettext("Reject")}
+        </button>
+      </div>
+    </div>
+    <.refusals refusals={agent_refusals(@refusals, "triage")} />
+    <.agent_rights agent="triage" runs={View.agent_card(@events, "triage").runs} />
+    """
   end
 
-  defp template_label("aligned"), do: gettext("Aligned profile")
-  defp template_label("partial"), do: gettext("Partial profile")
-  defp template_label("off_topic"), do: gettext("Off-topic document")
-  defp template_label("injection"), do: gettext("Prompt injection")
-  defp template_label("protected"), do: gettext("Protected criteria")
-  defp template_label("inconsistent"), do: gettext("Inconsistency")
-  defp template_label(other), do: other
+  defp step_body(%{step: %{key: :research}} = assigns) do
+    ~H"""
+    <.refusals refusals={agent_refusals(@refusals, "researcher")} />
+    <.agent_rights
+      :if={@step.status in [:running, :done, :failed]}
+      agent="researcher"
+      runs={View.agent_card(@events, "researcher").runs}
+    />
+    """
+  end
+
+  defp step_body(%{step: %{key: :analysis}} = assigns) do
+    ~H"""
+    <ul :if={@messages != []} class="space-y-1 text-sm">
+      <li :for={message <- @messages} class="rounded bg-secondary px-3 py-2">
+        <span class="font-semibold">{View.agent_name(message.from)} → {View.agent_name(message.to)} :</span>
+        {message.text}
+      </li>
+    </ul>
+    <.refusals refusals={agent_refusals(@refusals, "matcher")} />
+    <.agent_rights
+      :if={@step.status in [:running, :done, :failed]}
+      agent="matcher"
+      runs={View.agent_card(@events, "matcher").runs}
+    />
+    """
+  end
+
+  defp step_body(%{step: %{key: :decision}} = assigns) do
+    ~H"""
+    <div :if={!@replay && @snapshot.assessment && @step.status in [:action, :done]} class="space-y-3">
+      <.report :if={@step.status == :action} assessment={@snapshot.assessment} />
+      <details :if={@step.status == :done}>
+        <summary class="cursor-pointer text-xs font-semibold underline">
+          {gettext("See the AI's opinion again")}
+        </summary>
+        <div class="mt-2"><.report assessment={@snapshot.assessment} /></div>
+      </details>
+      <div :if={@application.state == :awaiting_decision} class="space-y-2">
+        <p class="text-sm font-semibold">{gettext("Send an email to this candidate?")}</p>
+        <div class="flex flex-col gap-2 sm:flex-row">
+          <.button
+            phx-click="decide"
+            phx-value-decision="yes"
+            id="decide-yes"
+            class="w-full sm:w-auto"
+          >
+            {gettext("Yes, draft the email")}
+          </.button>
+          <button phx-click="decide" phx-value-decision="no" id="decide-no" class={secondary_button()}>
+            {gettext("No")}
+          </button>
+        </div>
+      </div>
+    </div>
+    """
+  end
+
+  defp step_body(%{step: %{key: :writing}} = assigns) do
+    ~H"""
+    <.refusals refusals={agent_refusals(@refusals, "writer")} />
+    <.agent_rights
+      :if={@step.status in [:running, :done, :failed]}
+      agent="writer"
+      runs={View.agent_card(@events, "writer").runs}
+    />
+    """
+  end
+
+  defp step_body(%{step: %{key: :sending}} = assigns) do
+    ~H"""
+    <.form
+      :if={!@replay && @application.state == :draft_ready && @draft_form}
+      for={@draft_form}
+      id="draft-form"
+      phx-change="draft_change"
+      phx-submit="send_email"
+      class="space-y-3"
+    >
+      <p class="text-xs text-muted-foreground">
+        {gettext("Written by the AI. Edit it freely: only you can send it.")}
+      </p>
+      <.input field={@draft_form[:subject]} label={gettext("Subject")} />
+      <.input field={@draft_form[:body]} type="textarea" label={gettext("Body")} rows="12" />
+      <.button type="submit" id="send-email" class="w-full sm:w-auto">{gettext("Send the email")}</.button>
+    </.form>
+    <div :if={@snapshot.outbox != []} class="space-y-2">
+      <p class="text-xs text-muted-foreground">{gettext("Fake outbox: nothing leaves this page.")}</p>
+      <.outbox emails={@snapshot.outbox} />
+    </div>
+    <p :if={@application.state == :failed} class="text-sm text-destructive">
+      {gettext("The analysis failed:")} {@application.failure_reason}
+    </p>
+    """
+  end
+
+  defp thousands(value) do
+    case Integer.parse(to_string(value)) do
+      {amount, _} -> div(amount, 1000)
+      :error -> value
+    end
+  end
+
+  defp agent_refusals(refusals, agent), do: Enum.filter(refusals, &(&1.actor_role == agent))
+
+  defp secondary_button,
+    do: "w-full rounded-lg border px-3 py-2 text-sm font-semibold hover:bg-secondary sm:w-auto"
+
+  defp template_pitch("aligned"), do: gettext("Good profile: goes through every step.")
+  defp template_pitch("partial"), do: gettext("Half a match: the AI does not decide alone.")
+  defp template_pitch("off_topic"), do: gettext("Not a CV at all: rejected at sorting.")
+  defp template_pitch("injection"), do: gettext("Hides an order addressed to the AI.")
+  defp template_pitch("protected"), do: gettext("States age and origin: the AI never sees them.")
+
+  defp template_pitch("inconsistent"),
+    do: gettext("Claims a company nobody can find: the AI checks.")
+
+  defp template_pitch(_other), do: ""
 end

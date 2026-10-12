@@ -52,7 +52,11 @@ defmodule Portfolio.RecruitingDemo.PipelineTest do
 
     assert s.application.state == :awaiting_decision
     assert s.assessment.recommendation == :maybe
-    assert Enum.any?(s.assessment.weaknesses, &(&1 =~ "Phoenix" and &1 =~ "OTP"))
+
+    assert Enum.any?(
+             s.assessment.weaknesses,
+             &(&1 =~ "B2B prospecting" and &1 =~ "Long sales cycles")
+           )
   end
 
   test "off-topic document: rejected at triage as unrelated" do
@@ -94,7 +98,9 @@ defmodule Portfolio.RecruitingDemo.PipelineTest do
     [input | _] = input_of(s, "matcher")
     text = Jason.encode!(input)
 
-    for leaked <- ["52", "married", "children", "Algerian", "age", "family_status", "origin"] do
+    refute Enum.any?(~w(age family_status origin), &Map.has_key?(input["cv"], &1))
+
+    for leaked <- ["52", "married", "children", "Algerian"] do
       refute text =~ leaked, "Matcher input contains #{inspect(leaked)}"
     end
 

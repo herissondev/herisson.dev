@@ -14,13 +14,14 @@ defmodule Portfolio.RecruitingDemo.Pipeline.MatchWithVerification do
   @max_turns ResearchRequest.max_verifications() + 2
 
   @impl true
-  def run(%{application_id: _}, context, _options), do: turn(context, 1)
+  def run(%{application_id: _}, context, _options), do: turn(context, 1, nil)
 
-  defp turn(_context, turn) when turn > @max_turns,
+  defp turn(_context, turn, _feedback) when turn > @max_turns,
     do: {:error, "the Matcher did not conclude after #{@max_turns} turns"}
 
-  defp turn(context, turn) do
-    with {:ok, result} <- Pipeline.run_sub(MatcherReactor, context) do
+  # `feedback` tells the Matcher why its previous call was refused
+  defp turn(context, turn, feedback) do
+    with {:ok, result} <- Pipeline.run_sub(MatcherReactor, context, %{feedback: feedback}) do
       case outcome(result.tool_calls) do
         {:assessed, assessment} ->
           {:ok, assessment}
@@ -33,18 +34,18 @@ defmodule Portfolio.RecruitingDemo.Pipeline.MatchWithVerification do
                    question: question
                  }),
                {:ok, _} <- Pipeline.transition(context, :start_matching) do
-            turn(context, turn + 1)
+            turn(context, turn + 1, nil)
           end
 
         # Refused request (limit reached) or nothing useful: ask again
-        :retry ->
-          turn(context, turn + 1)
+        {:retry, reason} ->
+          turn(context, turn + 1, reason)
       end
     end
   end
 
   defp outcome(tool_calls) do
-    Enum.find_value(tool_calls, :retry, fn
+    Enum.find_value(tool_calls, {:retry, refusal(tool_calls)}, fn
       %{tool: "submit_assessment", status: :ok, result: result} ->
         {:assessed, result}
 
@@ -53,6 +54,13 @@ defmodule Portfolio.RecruitingDemo.Pipeline.MatchWithVerification do
 
       _ ->
         nil
+    end)
+  end
+
+  defp refusal(tool_calls) do
+    Enum.find_value(tool_calls, "no tool call", fn
+      %{status: status, tool: tool, reason: reason} when status != :ok -> "#{tool}: #{reason}"
+      _ -> nil
     end)
   end
 end

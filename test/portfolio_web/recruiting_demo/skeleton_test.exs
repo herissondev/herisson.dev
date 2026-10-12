@@ -8,12 +8,12 @@ defmodule PortfolioWeb.RecruitingDemo.SkeletonTest do
 
   test "renders the demo in english and french", %{conn: conn} do
     {:ok, _view, html} = live(conn, "/en/demo/recruiting")
-    assert html =~ "Recruiting demo"
-    assert html =~ "All data is fictitious"
+    assert html =~ "Hiring with AI agents, under control"
+    assert html =~ "Fictitious data"
 
     {:ok, _view, html} = live(build_conn(), "/fr/demo/recruiting")
-    assert html =~ "Démo de recrutement"
-    assert html =~ "Toutes les données sont fictives"
+    assert html =~ "Recruter avec des agents IA, sous contrôle"
+    assert html =~ "Business Developer B2B (SaaS)"
   end
 
   test "gives each visitor a demo session id", %{conn: conn} do

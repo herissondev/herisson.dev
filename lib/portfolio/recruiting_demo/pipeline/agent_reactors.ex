@@ -10,9 +10,11 @@ defmodule Portfolio.RecruitingDemo.Pipeline.MatcherReactor do
   end
 
   input :application_id
+  input :feedback
 
   step :matcher_input, {InputStep, agent: Matcher} do
     argument :application_id, input(:application_id)
+    argument :feedback, input(:feedback)
   end
 
   step :matcher, {AgentStep, agent: Matcher} do

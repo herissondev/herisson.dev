@@ -1,11 +1,12 @@
 defmodule Portfolio.RecruitingDemo.Validations.NoCompensationFigures do
   @moduledoc """
   The Matcher sees the salary range, the Writer must not. Key points handed
-  to the Writer are rejected if they mention pay or carry amounts.
+  to the Writer are rejected if they mention pay or carry a salary-like
+  figure ("60k", "60 k€"). Other amounts, such as revenue signed, are fine.
   """
   use Ash.Resource.Validation
 
-  @pattern ~r/salar|salaire|compensation|rémunération|remuneration|\d+\s*(k\b|€|\$)|[€$]\s*\d/iu
+  @pattern ~r/salar|salaire|compensation|rémunération|remuneration|\bpay\b|\b\d+\s*k(?:\s*(?:€|\$|eur|euros))?(?!\w)/iu
 
   def pattern, do: @pattern
 

@@ -16,16 +16,29 @@ defmodule Portfolio.RecruitingDemo.Catalog do
   @companies Map.delete(read.("research/companies.json"), "_note")
   @profiles Map.delete(read.("research/profiles.json"), "_note")
 
-  @doc "Default job offer, as attributes for `JobOffer.configure`."
-  def job_offer, do: atomize(@job_offer)
+  @locales ~w(fr en)
 
-  @doc "CV templates, classic ones first."
-  def cvs, do: Enum.map(@cvs, &atomize/1)
+  @doc "Default job offer in a locale (fr or en), as attributes for `JobOffer.configure`."
+  def job_offer(locale \\ "en"), do: atomize(@job_offer[locale(locale)])
 
-  def cv(template_id), do: Enum.find(cvs(), &(&1.template_id == template_id))
+  @doc "CV templates in a locale, classic ones first."
+  def cvs(locale \\ "en") do
+    Enum.map(@cvs, fn template ->
+      template[locale(locale)]
+      |> atomize()
+      |> Map.merge(%{template_id: template["template_id"], kind: template["kind"]})
+    end)
+  end
+
+  def cv(template_id, locale \\ "en"),
+    do: Enum.find(cvs(locale), &(&1.template_id == template_id))
 
   @doc "Attributes of a CV template for `CvSubmission.submit`."
-  def cv_attributes(template_id), do: template_id |> cv() |> Map.delete(:kind)
+  def cv_attributes(template_id, locale \\ "en"),
+    do: template_id |> cv(locale) |> Map.delete(:kind)
+
+  defp locale(locale) when locale in @locales, do: locale
+  defp locale(_locale), do: "en"
 
   @doc "Simulated company register: `nil` when the company is unknown."
   def company(name), do: Map.get(@companies, name)

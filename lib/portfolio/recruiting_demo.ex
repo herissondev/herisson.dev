@@ -41,9 +41,9 @@ defmodule Portfolio.RecruitingDemo do
   @doc "Subscribes the caller to a visitor's journal events."
   def subscribe(session_id), do: Phoenix.PubSub.subscribe(pubsub(), topic(session_id))
 
-  def default_offer, do: Catalog.job_offer()
-  def cv_templates, do: Catalog.cvs()
-  def cv_template(template_id), do: Catalog.cv_attributes(template_id)
+  def default_offer(locale \\ "en"), do: Catalog.job_offer(locale)
+  def cv_templates(locale \\ "en"), do: Catalog.cvs(locale)
+  def cv_template(template_id, locale \\ "en"), do: Catalog.cv_attributes(template_id, locale)
   def triage_threshold, do: RouteTriage.threshold()
 
   @doc """

@@ -22,7 +22,7 @@ defmodule Portfolio.RecruitingDemo.Agents.Matcher do
   def role, do: :matcher
 
   @impl true
-  def input(application_id, actor, _args) do
+  def input(application_id, actor, args) do
     application = Ash.get!(Application, application_id, actor: actor)
     cv = Ash.get!(CvSubmission, application.cv_submission_id, actor: actor)
     offer = Ash.get!(JobOffer, application.job_offer_id, actor: actor)
@@ -60,8 +60,14 @@ defmodule Portfolio.RecruitingDemo.Agents.Matcher do
         ),
       research: research,
       verifications: Enum.map(requests, &Agent.visible(&1, [:question, :status])),
-      verifications_left: max(ResearchRequest.max_verifications() - length(requests), 0)
+      verifications_left: max(ResearchRequest.max_verifications() - length(requests), 0),
+      language: args[:locale] || "en"
     }
+    |> then(fn input ->
+      if args[:feedback],
+        do: Map.put(input, :previous_attempt_refused, args[:feedback]),
+        else: input
+    end)
     |> ProtectedCriteria.strip()
   end
 end

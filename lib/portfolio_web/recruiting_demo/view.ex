@@ -20,16 +20,184 @@ defmodule PortfolioWeb.RecruitingDemo.View do
   def agent_model("triage"), do: "Jev"
   def agent_model(_), do: "LLM"
 
-  def agent_rights("triage"), do: gettext("Reads the CV text and the job title. No tools.")
+  @doc "What an agent is allowed to see, in plain words."
+  def agent_sees("triage"), do: gettext("the CV text and the job title")
+  def agent_sees("researcher"), do: gettext("the candidate's name and declared experiences")
+  def agent_sees("matcher"), do: gettext("the CV, the research and the full job offer")
+  def agent_sees("writer"), do: gettext("the verdict, the key points and the job title")
 
-  def agent_rights("researcher"),
-    do: gettext("Reads the name and declared experiences. Never the offer.")
+  @doc "What an agent never gets, whatever its model asks for."
+  def agent_never("triage"), do: gettext("salary, offer details, any tool")
+  def agent_never("researcher"), do: gettext("the job offer, the salary, the Matcher's report")
+  def agent_never("matcher"), do: gettext("age, family situation, origin; sending emails")
+  def agent_never("writer"), do: gettext("the raw CV, the salary; sending emails")
 
-  def agent_rights("matcher"),
-    do: gettext("Reads the CV (without protected criteria), research and full offer.")
+  @doc """
+  The six steps of the pipeline, derived from the events only (so the
+  replay shows the same thing). Each step has a status among
+  `:waiting | :running | :done | :action | :failed | :skipped`.
+  """
+  def steps(events) do
+    state = state(events)
+    cards = Map.new(@agents, &{&1, agent_card(events, &1)})
 
-  def agent_rights("writer"),
-    do: gettext("Reads the verdict, key points and job title. Never the CV nor the salary.")
+    decision =
+      Enum.find(events, &(&1.type == "human_decision" and Map.has_key?(&1.payload, "decision")))
+
+    steps = [
+      %{
+        key: :triage,
+        agent: "triage",
+        title: gettext("Sorting"),
+        status: agent_status(cards["triage"], state == "manual_review"),
+        summary: triage_summary(events, state)
+      },
+      %{
+        key: :research,
+        agent: "researcher",
+        title: gettext("Background check"),
+        status: agent_status(cards["researcher"]),
+        summary: research_summary(events)
+      },
+      %{
+        key: :analysis,
+        agent: "matcher",
+        title: gettext("Analysis"),
+        status: agent_status(cards["matcher"]),
+        summary: analysis_summary(events)
+      },
+      %{
+        key: :decision,
+        agent: nil,
+        title: gettext("Your decision"),
+        status: decision_status(state, decision),
+        summary: decision_summary(state, decision)
+      },
+      %{
+        key: :writing,
+        agent: "writer",
+        title: gettext("Email draft"),
+        status: agent_status(cards["writer"]),
+        summary: writing_summary(cards["writer"])
+      },
+      %{
+        key: :sending,
+        agent: nil,
+        title: gettext("Sending"),
+        status: sending_status(state),
+        summary: sending_summary(state)
+      }
+    ]
+
+    skip_after_stop(steps, state)
+  end
+
+  defp agent_status(card, needs_you? \\ false)
+  defp agent_status(_card, true), do: :action
+  defp agent_status(%{status: :failed}, _), do: :failed
+  defp agent_status(%{status: :running}, _), do: :running
+  defp agent_status(%{runs: runs}, _) when runs > 0, do: :done
+  defp agent_status(_card, _), do: :waiting
+
+  defp decision_status("awaiting_decision", _), do: :action
+  defp decision_status(_state, nil), do: :waiting
+  defp decision_status(_state, _decision), do: :done
+
+  defp sending_status("draft_ready"), do: :action
+  defp sending_status("sent"), do: :done
+  defp sending_status(_state), do: :waiting
+
+  # Once the application is rejected or failed, the remaining steps never run
+  defp skip_after_stop(steps, state) when state in ["rejected", "failed"],
+    do: Enum.map(steps, &if(&1.status == :waiting, do: %{&1 | status: :skipped}, else: &1))
+
+  defp skip_after_stop(steps, _state), do: steps
+
+  defp triage_summary(_events, "manual_review"), do: gettext("Ambiguous case: your call")
+
+  defp triage_summary(events, _state) do
+    case last_output(events, "triage") do
+      %{"category" => category, "confidence" => confidence} ->
+        gettext("%{category} · confidence %{percent}%",
+          category: category |> String.to_existing_atom() |> category_label(),
+          percent: round(confidence * 100)
+        )
+
+      _ ->
+        nil
+    end
+  end
+
+  defp research_summary(events) do
+    searches =
+      Enum.count(
+        events,
+        &(&1.type == "tool_called" and &1.payload["topic"] in ~w(experiences companies skills))
+      )
+
+    checks = Enum.count(events, &(&1.type == "agent_message"))
+
+    cond do
+      searches == 0 ->
+        nil
+
+      checks == 0 ->
+        ngettext("1 search", "%{count} searches in parallel", searches)
+
+      true ->
+        ngettext(
+          "%{count} searches, 1 extra check",
+          "%{count} searches, %{checks} extra checks",
+          checks,
+          count: searches,
+          checks: checks
+        )
+    end
+  end
+
+  defp analysis_summary(events) do
+    case Enum.find(
+           events,
+           &(&1.type == "tool_called" and Map.has_key?(&1.payload, "recommendation"))
+         ) do
+      %{payload: %{"recommendation" => rec}} ->
+        gettext("Recommendation: %{rec}",
+          rec: rec |> String.to_existing_atom() |> recommendation_label()
+        )
+
+      nil ->
+        nil
+    end
+  end
+
+  defp decision_summary("awaiting_decision", _), do: gettext("Your turn: send an email or not?")
+  defp decision_summary(_state, %{payload: %{"decision" => "yes"}}), do: gettext("You said yes")
+  defp decision_summary(_state, %{payload: %{"decision" => "no"}}), do: gettext("You said no")
+  defp decision_summary(_state, _), do: nil
+
+  defp writing_summary(%{runs: runs}) when runs > 0, do: gettext("Draft written by the AI")
+  defp writing_summary(_card), do: nil
+
+  defp sending_summary("draft_ready"), do: gettext("Your turn: review and send")
+  defp sending_summary("sent"), do: gettext("Sent to the fake outbox")
+  defp sending_summary(_state), do: nil
+
+  defp last_output(events, agent) do
+    events
+    |> Enum.filter(&(&1.type == "agent_output" and &1.payload["agent"] == agent))
+    |> List.last()
+    |> case do
+      nil -> nil
+      event -> event.payload["output"]
+    end
+  end
+
+  @doc "A tool, as an action in plain words."
+  def tool_action("send_email"), do: gettext("send the email")
+  def tool_action(tool), do: tool
+
+  @doc "Tool calls refused by a policy, with the agent that tried."
+  def refusals(events), do: Enum.filter(events, &(&1.type == "tool_denied"))
 
   @doc "State of an agent card: `:waiting | :running | :done | :refused | :failed`, plus details."
   def agent_card(events, agent) do
@@ -206,18 +374,6 @@ defmodule PortfolioWeb.RecruitingDemo.View do
 
   def actor(%{actor_kind: "agent", actor_role: role}), do: agent_name(role)
   def actor(%{actor_role: role}), do: agent_name(role)
-
-  @doc "Line diff between the agent's draft and the visitor's text."
-  def diff(old, new) do
-    lines = fn %{"subject" => subject, "body" => body} ->
-      ["Subject: " <> (subject || "") | String.split(body || "", "\n")]
-    end
-
-    old
-    |> lines.()
-    |> List.myers_difference(lines.(new))
-    |> Enum.flat_map(fn {op, chunk} -> Enum.map(chunk, &{op, &1}) end)
-  end
 
   def pretty(term), do: Jason.encode!(term, pretty: true)
 end
