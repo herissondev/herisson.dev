@@ -36,7 +36,8 @@ defmodule PortfolioWeb.RecruitingDemo.DemoLive do
      |> assign(:replay, nil)
      |> assign(:integrity, nil)
      |> assign(:context_agent, nil)
-     |> assign_applications()}
+     |> assign_applications()
+     |> then(&assign(&1, :intro, &1.assigns.applications == []))}
   end
 
   @impl true
@@ -151,6 +152,9 @@ defmodule PortfolioWeb.RecruitingDemo.DemoLive do
   def handle_event("close_context", _params, socket),
     do: {:noreply, assign(socket, :context_agent, nil)}
 
+  def handle_event("show_intro", _params, socket), do: {:noreply, assign(socket, :intro, true)}
+  def handle_event("close_intro", _params, socket), do: {:noreply, assign(socket, :intro, false)}
+
   @impl true
   def handle_info({:recruiting_demo, :event, event}, socket) do
     case socket.assigns.snapshot do
@@ -244,6 +248,15 @@ defmodule PortfolioWeb.RecruitingDemo.DemoLive do
               "You are hiring a salesperson. Four AI agents sort, check and analyse the application. Each one can only do what its role allows, and you alone decide to send the email."
             )}
           </p>
+          <button
+            type="button"
+            id="open-intro"
+            phx-click="show_intro"
+            class="inline-flex items-center gap-1 text-sm font-semibold underline"
+          >
+            <.icon name="hero-information-circle-mini" class="h-4 w-4" />
+            {gettext("What this demo shows")}
+          </button>
           <div class="flex flex-wrap gap-1.5">
             <.tag text={gettext("Fictitious data")} variant="secondary" />
             <.tag text={gettext("Nothing is kept")} variant="secondary" />
@@ -255,6 +268,8 @@ defmodule PortfolioWeb.RecruitingDemo.DemoLive do
         <.pipeline :if={@live_action == :show && @snapshot} {assigns} />
       </div>
     </main>
+
+    <.intro :if={@intro} />
 
     <.modal :if={@context_agent} id="agent-context" show on_cancel={close_context()}>
       <h2 class="text-lg font-bold">
@@ -269,6 +284,86 @@ defmodule PortfolioWeb.RecruitingDemo.DemoLive do
       >{View.pretty(event.payload["input"])}</pre>
     </.modal>
     """
+  end
+
+  # A plain overlay rather than the site modal: it opens at the top (no focus
+  # jump to the button below) and keeps tight margins on phones
+  defp intro(assigns) do
+    ~H"""
+    <div
+      id="intro"
+      class="fixed inset-0 z-50 flex items-end justify-center bg-zinc-900/50 sm:items-center sm:p-4"
+      phx-window-keydown="close_intro"
+      phx-key="escape"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="intro-title"
+    >
+      <div
+        class="relative max-h-[92vh] w-full max-w-lg space-y-5 overflow-y-auto rounded-t-2xl bg-white p-5 shadow-lg sm:rounded-2xl sm:p-8"
+        phx-click-away="close_intro"
+      >
+        <button
+          type="button"
+          phx-click="close_intro"
+          class="absolute right-3 top-3 p-2"
+          aria-label={gettext("close")}
+        >
+          <.icon name="hero-x-mark-solid" class="h-5 w-5 opacity-50 hover:opacity-80" />
+        </button>
+        <div class="pr-8">
+          <h2 id="intro-title" class="text-xl font-bold">{gettext("What this demo shows")}</h2>
+          <p class="mt-1 text-sm text-muted-foreground">
+            {gettext(
+              "A hiring pipeline run by four AI agents. Behind the scenario, the point is how to put AI agents to work in a business without losing control."
+            )}
+          </p>
+        </div>
+
+        <ul class="space-y-4">
+          <li :for={{icon, title, text} <- intro_points()} class="flex gap-3">
+            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-secondary">
+              <.icon name={icon} class="h-4 w-4" />
+            </span>
+            <div>
+              <p class="text-sm font-semibold">{title}</p>
+              <p class="text-sm text-muted-foreground">{text}</p>
+            </div>
+          </li>
+        </ul>
+
+        <.button
+          type="button"
+          id="close-intro"
+          phx-click="close_intro"
+          class="w-full py-3 text-base"
+        >
+          {gettext("Try the demo")}
+        </.button>
+      </div>
+    </div>
+    """
+  end
+
+  defp intro_points do
+    [
+      {"hero-lock-closed", gettext("Agents limited to their role"),
+       gettext(
+         "Each agent only sees and does what its role allows: the Writer never sees the salary, no agent can send an email. These limits are enforced in code, not asked in a prompt: even a fooled AI cannot get around them."
+       )},
+      {"hero-user", gettext("The human stays in charge"),
+       gettext(
+         "The AI sorts, checks and analyses, but you decide. Unclear cases come back to you, and only you can send the email, after editing it if you want."
+       )},
+      {"hero-document-text", gettext("Everything is traceable"),
+       gettext(
+         "Every step is recorded, timestamped and chained: you can see exactly what each agent received, replay an application and prove nothing was altered."
+       )},
+      {"hero-shield-exclamation", gettext("Tested on tricky cases"),
+       gettext(
+         "A document that is not a CV, instructions hidden for the AI, a company nobody can find: pick these candidates to see how the system reacts."
+       )}
+    ]
   end
 
   defp new_application(assigns) do

@@ -123,6 +123,17 @@ defmodule PortfolioWeb.RecruitingDemo.DemoLiveTest do
     assert json_response(conn, 200)["events"] == []
   end
 
+  test "the explanation opens on the first visit, closes and reopens", %{conn: conn} do
+    {:ok, view, _html} = live(conn, "/en/demo/recruiting")
+    assert has_element?(view, "#intro", "Agents limited to their role")
+
+    view |> element("#close-intro") |> render_click()
+    refute has_element?(view, "#intro")
+
+    view |> element("#open-intro") |> render_click()
+    assert has_element?(view, "#intro", "Everything is traceable")
+  end
+
   test "an application id from another session is not shown", %{conn: conn} do
     {_view, path} = submit(conn)
 
