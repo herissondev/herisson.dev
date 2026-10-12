@@ -56,6 +56,7 @@ defmodule Portfolio.MixProject do
       {:set_locale, "~> 0.2.9"},
       {:image, "~> 0.62"},
       {:ash, "~> 3.33"},
+      {:simple_sat, "~> 0.1"},
       {:ash_state_machine, "~> 0.2"},
       {:ash_phoenix, "~> 2.3"},
       {:ash_ai, "~> 1.1"},
@@ -63,7 +64,8 @@ defmodule Portfolio.MixProject do
       {:req, "~> 0.5"},
       {:req_llm, "~> 1.24"},
       {:boundary, "~> 0.10", runtime: false},
-      {:hammer, "~> 7.0"}
+      {:hammer, "~> 7.0"},
+      {:sourceror, "~> 1.7", only: [:dev, :test]}
     ]
   end
 

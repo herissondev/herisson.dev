@@ -12,6 +12,7 @@ defmodule Portfolio.RecruitingDemo.Supervisor do
   def init(_opts) do
     if RecruitingDemo.enabled?() do
       children = [
+        RecruitingDemo.AuditLog,
         {Task.Supervisor, name: RecruitingDemo.TaskSupervisor},
         {RecruitingDemo.RateLimit, clean_period: :timer.minutes(1)}
       ]
